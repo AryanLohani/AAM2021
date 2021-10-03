@@ -1,0 +1,87 @@
+@keyframes loop {
+    0% {
+        left: -0.25em;
+   }
+    15% {
+        left: 2.25em;
+        transform: rotate(0deg);
+   }
+    85% {
+        left: 2.25em;
+        transform: rotate(-360deg);
+   }
+    100% {
+        left: 5em;
+        transform: rotate(-360deg);
+   }
+}
+.loadercoaster {
+    position: relative;
+    height: 5em;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 5em;
+}
+.loadercoaster:before, .loadercoaster:after {
+    box-sizing: border-box;
+    content: '';
+    display: block;
+    position: absolute;
+}
+.loadercoaster:before {
+    background-color: #fff;
+    height: 0.125em;
+    bottom: 0;
+    width: 5em;
+}
+.loadercoaster:after {
+    border: 0.125em solid #fff;
+    border-radius: 50%;
+    bottom: 0;
+    left: 50%;
+    height: 5em;
+    margin-left: -2.5em;
+    width: 5em;
+}
+.loadercoaster__cart {
+    border-radius: 50%;
+    animation: loop 2s linear infinite;
+    background-color: #fff;
+    height: 0.5em;
+    left: -0.25em;
+    position: absolute;
+    bottom: 0.125em;
+    transform-origin: 50% -1.875em;
+    width: 0.5em;
+}
+.loadercoaster__cart:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.loadercoaster__cart:nth-child(2) {
+    animation-delay: 0.2s;
+}
+/* Stuff for the sake of this demo */
+
+.wrapper {
+    display: block;
+    z-index: 100000 !important;
+    position: absolute;
+    top: 0%;
+    background-color: #1d2a30;
+    color: #3c6070;
+    /* margin: 5em auto; */
+    text-align: center;
+    /* width: 20em; */
+    width: 100%;
+    height: 100vh;
+}
+
+.content{
+    margin-top: 30vh;
+}
+h1, h2, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+    text-shadow: 0 -1px #000;
+}
