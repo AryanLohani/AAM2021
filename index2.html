@@ -454,13 +454,7 @@
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
     <script>
-        let x = 0
-        function clickme() {
-            x = x % 6;
-            for (let i = 0; i < 6; i++) {
-                document.getElementsByClassName("section-3")[i].style.display = "none";
-            }
-        }
+
         $(window).on('load', function () {
             if ($('.wrapper').length) {
                 $('.wrapper').delay(1600).fadeOut('fast', function () {
