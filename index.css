@@ -1,28 +1,20 @@
-.imgd{
-  
+.section-3{
     width: 100%;
-    height: 400px;
-    /* border: 2px solid black; */
-
-
-}
-img{
- margin: 2%;
+    height: 100vh;
+    padding: 5% 7%;
+   
 }
 .space{
     height: 100px;
     width: 100%;
 }
-.img{
-    background-image:linear-gradient(to right ,rgba(238, 236, 235, 0.92),rgba(248, 243, 237, 0.842)) ;
-    margin: 5% auto;
-    padding: 1% 4.5% 2% 4.5%;
-    margin-bottom: 30px;
-    width:90%;
-    height:450px;
-    overflow-y: scroll;
-    box-shadow: 1px 3px 3px black,1px 3px 3px solid;
-  
+.flexd{
+    display: flex;
+    flex-direction: column;
+}
+.posn{
+    position: absolute;
+    top:0%;
 }
 .abtus{
     padding: 8% 20%;

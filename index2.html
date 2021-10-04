@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Alumni Meet</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link href="index.css" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    <link href="preloader.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+
+        <div class="container-fluid">
+            <a class="navbar-brand xyz" href="#"><img src="img/latestlogo.jpeg"></a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
+				aria-expanded="false" aria-label="Toggle navigation"> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"> <a class="nav-link" href="index.php">Home </a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Events </a>
+                        <div>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="alumni_talks.php"> Alumni Talks </a></li>
+                                <li><a class="dropdown-item" href="alvida.php"> Alvida </a></li>
+                                <li><a class="dropdown-item" href="AAM.php">Annual Alumni Meet </a></li>
+                                <li><a class="dropdown-item" href="homecoming.php"> Homecoming </a></li>
+                                <li><a class="dropdown-item" href="leadershipsummit.php"> Leadership Summit </a></li>
+                                <li><a class="dropdown-item" href="phonathon.php"> Phonathon </a></li>
+                                <li><a class="dropdown-item" href="SAM.php"> Students Alumni Meet </a></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Initiatives </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ACAP.php"> ACAP</a></li>
+                            <li><a class="dropdown-item" href="affinity.php"> Affinity Programme </a></li>
+                            <li><a class="dropdown-item" href="https://studentsalumnicell-iitkgp.medium.com/"> Alumni
+                                    Blog </a></li>
+                            <li><a class="dropdown-item" href="myimprint.php"> My Imprint </a></li>
+                            <li><a class="dropdown-item" href="SAMP.php"> SAMP</a></li>
+                            <li><a class="dropdown-item" href="sparc.php"> SPARC </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Publications </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://sac.iitkgp.ac.in/temposhout_final_6.pdf"> Tempo
+                                    Shout </a></li>
+                            <li><a class="dropdown-item" href="yearbook.php"> Yearbook </a></li>
+                            <li><a class="dropdown-item" href="YOY.php"> YOY </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="team.php"> The Team </a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup.php"> Alumni-Reg </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Sponsors </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="sponsors2021.php"> 2021 </a></li>
+                            <li><a class="dropdown-item" href="sponsors.php"> 2020 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2019.php"> 2019 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2018.php"> 2018 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2017.php"> 2017</a></li>
+                            <li><a class="dropdown-item" href="sponsors2016.php"> 2016 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2015.php"> 2015 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2014.php"> 2014 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2013.php"> 2013 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2012.php"> 2012 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Preloader -->
+    <div class="wrapper">
+        <div class="content">
+            <h1 style="color:white; margin-bottom:10vh">Welcome to the 18th Alumni Meet</h1>
+
+            <div class="loadercoaster">
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader ends -->
+    <!-- page content -->
+
+    <div class="row">
+        <div class="col-lg-6 ">
+            <div class="bgimg"></div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="abtus">
+                <h1 class="abt">About US</h1>
+                <br />
+                <p class="abtContent">The Students' Alumni Cell, IIT
+                    Kharagpur is a voluntary student body working under the aegis of the
+                    Dean Outreach. It strives to bridge the gap between IIT Kharagpur and its esteemed alumni community.
+
+                    The Students' Alumni Cell continuously endeavours to strengthen the relations of the alumni of this
+                    Institute and their alma mater. It has been instrumental in organising the Annual Alumni Meet,
+                    Regional Student Alumni Meet, regular guest lectures by distinguished alumni in the campus,
+                    Leadership Summit, publishing the annual literary magazine (Yearnings of Yore) & the annual
+                    Yearbook. The Students' Alumni Cell also operates the Student - Alumni Mentorship Programme, My
+                    Imprint (Giving Back - Alumni contribution) and organises Alvida (the annual farewell dinner).</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="btn" style="height: 200px; width: 300px;">
+        <h1>Hey ME</h1>
+    </div>
+    <section class="section-3 pt-3">
+        <div class="container-fluid p-0">
+            <div style="padding:0 3rem;">
+                <div class="row">
+
+                    <div class="col-md-3 d-flex justify-content-center">
+                        <h1 class="gallery-h3 pt-5 text-center">Arena</h1>
+
+                    </div>
+                    <div class="col-md-9">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-6 x">
+                                    <div class="image">
+                                        <img src="img/day1c/compressed day 1/arena3.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                            <div class="image__title">Arena</div>
+                                            <p class="image__description">The Arena is a nostalgia-filled site
+                                                welcoming
+                                                the Alumni to share their old memories with us.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 x align-items-center">
+                                    <div class="image">
+                                        <img src="img/day2c/compressed day 2/arena.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                        </div>
+                                    </div>
+                                    <div class="image pt-3">
+                                        <img src="img/day2c/compressed day 2/cake_cutting.jpg"
+                                            class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-3 x align-items-center">
+                                    <div class="image">
+                                        <img src="img/day1c/compressed day 1/alumni4.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                        </div>
+                                    </div>
+                                    <div class="image pt-3">
+                                        <img src="img/day1c/compressed day 1/alumni2.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-3 pt-3">
+        <div class="container-fluid p-0">
+            <div style="padding:0 3rem;">
+                <div class="row">
+                    <div class="col-md-3 d-flex justify-content-center">
+                        <h1 class="gallery-h3 pt-5 text-center text-center">Grand Reunion</h1>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-4 x align-items-center">
+
+                                    <div class="image ">
+                                        <img src="img/day1c/compressed day 1/awards.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                        </div>
+                                    </div>
+                                    <div class="image pt-3">
+                                        <img src="img/day1c/compressed day 1/alumni.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-8 x">
+                                    <div class="image">
+                                        <img src="img/day3c/compressed day 3/ceremony4.jpg"
+                                            class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                            <div class="image__title">Grand Reunion</div>
+                                            <p class="image__description">The Annual Alumni Meet is a fascinating
+                                                trip
+                                                down memory lane
+                                                that allows our alumni to see old friends again and remember places
+                                                and
+                                                stories that were
+                                                almost forgotten.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-3 pt-3">
+        <div class="container-fluid p-0">
+            <div style="padding:0 3rem;">
+                <div class="row">
+                    <div class="col-md-3 d-flex justify-content-center">
+                        <h1 class=" gallery-h3 pt-5 text-center">Department Visit</h1>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-4 x align-items-center">
+                                    <div class="image">
+                                        <img src="img/day2c/compressed day 2/nalanda2.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                        </div>
+                                    </div>
+                                    <div class="image pt-3">
+                                        <img src="img/day1c/compressed day 1/alumni.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-8 x">
+                                    <div class="image">
+                                        <img src="img/day1c/compressed day 1/dept_visit2.jpg"
+                                            class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                            <div class="image__title">Department Visit</div>
+                                            <p class="image__description">Departments are our own shrine of
+                                                knowledge
+                                                filled with bittersweet
+                                                memories, and a visit back to this shrine surely brings back
+                                                memories of
+                                                all the hard work,
+                                                learning, and excitement.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-3 pt-3">
+        <div class="container-fluid p-0">
+            <div style="padding:0 3rem;">
+                <div class="row">
+                    <div class="col-md-3 d-flex justify-content-center">
+                        <h1 class="gallery-h3 pt-5 text-center">Musical Night</h1>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-6 content-overlay x">
+                                    <div class="image">
+                                        <img src="img/yellow-diary.jfif" class="img-fluid image__img">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 content-overlay x">
+                                    <div class="image">
+                                        <img src="img/day2c/compressed day 2/yellow-diary.jpg"
+                                            class="img-fluid image__img">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-3 pt-3">
+        <div class="container-fluid p-0">
+            <div style="padding:0 3rem;">
+                <div class="row">
+                    <div class="col-md-3 d-flex justify-content-center">
+                        <h1 class="gallery-h3 pt-5 text-center">Hall Visit</h1>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-3 content-overlay x">
+                                    <div class="image ">
+                                        <img src="img/day1c/compressed day 1/flames.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary">
+                                        </div>
+                                    </div>
+                                    <div class="image pt-3">
+                                        <img src="img/day1c/compressed day 1/hall_visit2.jpg"
+                                            class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 content-overlay x">
+                                    <div class="image ">
+                                        <img src="img/day1c/compressed day 1/flames2.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary">
+                                        </div>
+                                    </div>
+                                    <div class="image pt-2">
+                                        <img src="img/day1c/compressed day 1/hall_visit4.jpg"
+                                            class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 content-overlay x">
+                                    <div class="image">
+
+                                        <img src="img/day1c/compressed day 1/hall_visit.jpg"
+                                            class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                            <div class="image__title">Hall Visit</div>
+                                            <p class="image__description">The place we learnt and lived for the 4
+                                                most
+                                                important years in our life surely has a fragment of our soul inside
+                                                it and to come back to our hall of residence is nothing less than a
+                                                reunion of all of our soul.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-3 pt-3">
+        <div class="container-fluid p-0">
+            <div style="padding:0 3rem;">
+                <div class="row">
+                    <div class="col-md-3 d-flex justify-content-center">
+                        <h1 class="gallery-h3 pt-5 text-center">Campus Tour</h1>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-7 content-overlay x">
+                                    <div class="image">
+                                        <img src="img/day2c/compressed day 2/campus_tour.jpg"
+                                            class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                            <div class="image__title">Campus Tour</div>
+                                            <p class="image__description">Campus Tour is our way of showing the 2200
+                                                acre campus in a nutshell
+                                                and highlighting all the major developments around.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 content-overlay x">
+                                    <div class="image">
+
+                                        <img src="img/day2c/compressed day 2/campus_tour2.jpg"
+                                            class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center">
+                                            <div class="image__title">Campus Tour</div>
+                                            <p class="image__description"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center pt-3">
+                                <div class="col-md-5 x">
+                                    <div class="image">
+                                        <img src="img/day2c/compressed day 2/nalanda.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary text-center text-center">
+                                            <div class="image__title">Campus Tour</div>
+                                            <p class="image__description">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 x">
+                                    <div class="image">
+                                        <img src="img/day2c/compressed day 2/football.jpg" class="img-fluid image__img">
+                                        <div class="image__overlay image__overlay--primary">
+                                            <div class="image__title">Campus Tour</div>
+                                            <p class="image__description text-center">In the progressive world we
+                                                live
+                                                in, there are a lot of changes and yet a lot of constants
+                                                and it’s a pleasure to see the newer developments in harmony with
+                                                the
+                                                same old roads.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
+    <script>
+        let x = 0
+        function clickme() {
+            x = x % 6;
+            for (let i = 0; i < 6; i++) {
+                document.getElementsByClassName("section-3")[i].style.display = "none";
+            }
+        }
+        $(window).on('load', function () {
+            if ($('.wrapper').length) {
+                $('.wrapper').delay(1600).fadeOut('fast', function () {
+                    $(this).remove();
+                });
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            gsap.to(window, { duration: 1, scrollTo: { y: "#section" + (index + 1), offsetY: 70 } });
+        })
+    </script>
+</body>
+
+</html>
