@@ -39,9 +39,9 @@
     position: absolute;
     top:5%;
     left:7%;
-    width: 750px;
-    height: 550px;
-    background-image: url('img.png');
+    width: 700px;
+    height: 500px;
+    background-image: url('img/img.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     transform: rotate(-30deg);
