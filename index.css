@@ -5,7 +5,7 @@
    
 }
 .space{
-    height: 100px;
+    height:0;
     width: 100%;
 }
 .flexd{
@@ -16,26 +16,27 @@
     position: absolute;
     top:0%;
 }
-.image101{
+.img100{
  
- height: 100%;
- width: 300px;
+ height: 250px;
 
+}
+.imgg100{
+    height: 515px;
 }
 .imght350{
     
-    height: 350px;
+    height: 280px;
     width: 100%;
 }
 .imght500{
     height: 500px;
 }
 .imght600{
-    height: 600px;
+    height: 550px;
 }
 .imght292{
-    height: 292px;
-    margin-bottom: 4%;
+    height: 267px;
     
 }
 .imght550{
@@ -213,13 +214,16 @@ nav{
    }
    .imght600{
        height: 200px;
-       margin-top: 5%;
+      
    }
    .imght292{
     height: 200px;
     margin-top: 5%;
     
   }
+  .imgg100{
+    height: 200px;
+}
  
 }
 @media (max-width: 890px) and (min-width : 770px){
