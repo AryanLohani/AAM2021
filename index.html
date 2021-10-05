@@ -141,7 +141,7 @@
 		<button type="button" onclick="next()" style="margin: 0 auto;">Next</button>
 	</div>
 
-	<section class="section-3 pt-3">
+	<section class="section-3 pt-3 arex">
 
 		<h1 class="gallery-h3 pt-5 text-center">Arena</h1>
 
@@ -197,7 +197,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3">
+	<section class="section-3 pt-3 z">
 
 		<h1 class="gallery-h3 pt-5 text-center text-center">Grand Reunion</h1>
 
@@ -239,7 +239,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3">
+	<section class="section-3 pt-3 z">
 
 		<h1 class=" gallery-h3 pt-5 text-center">Department Visit</h1>
 		<div class="row pt-3">
@@ -280,7 +280,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3">
+	<section class="section-3 pt-3 z">
 
 		<h1 class="gallery-h3 pt-5 text-center">Musical Night</h1>
 
@@ -298,7 +298,7 @@
 		</div>
 
 	</section>
-	<section class="section-3 pt-3">
+	<section class="section-3 pt-3 z">
 
 		<h1 class="gallery-h3 pt-5 text-center">Hall Visit</h1>
 		<div class="row" pt-3>
@@ -349,7 +349,7 @@
 		</div>
 
 	</section>
-	<section class="section-3 pt-3">
+	<section class="section-3 pt-3 z">
 
 		<h1 class="gallery-h3 pt-5 text-center">Campus Tour</h1>
 		<div class="row pt-3">
@@ -434,6 +434,69 @@
 			}
 			document.getElementsByClassName("section-3")[x--].style.display = "block";
 		}
+		let y =0;
+		$('.section-3').bind('mousewheel', function(e){
+     if(e.originalEvent.wheelDelta < 0) {
+         //scroll down
+		 var ex = document.getElementsByClassName('section3')
+		 y++;
+		 if(y>30){
+		 next();
+		 y=0;
+         console.log('Down');}
+     }else {
+         //scroll up
+		
+		 y++;
+		 if(y>30){
+		 prev();
+		 y=0;
+         console.log('Up');}
+     }
+
+     //prevent page fom scrolling
+     return false;
+ });
+
+var arr = document.getElementsByClassName("arex");
+    
+        gsap.to(arr, {
+        scrollTrigger: {
+        trigger: arr,
+        start:'top 80%',
+        toggleActions: "play none none none"
+           },
+        opacity:1,
+        duration:1.25,
+		y:50,
+         }
+		);
+
+var arr2 = document.getElementsByClassName("bgimg");
+ var arr3 = document.getElementsByClassName("abtus");   
+        gsap.from(arr2, {
+        scrollTrigger: {
+        trigger: [arr2],
+        start:'top 80%',
+        toggleActions: "play none none none"
+           },
+        opacity:0,
+        duration:1.25,
+		x:100
+         }
+		);
+		gsap.from(arr3, {
+        scrollTrigger: {
+        trigger: [arr3],
+        start:'top 80%',
+        toggleActions: "play none none none"
+           },
+        opacity:0,
+        duration:1.25,
+		x:100
+         }
+		);
+
 		$(window).on('load', function () {
 			if ($('.wrapper').length) {
 				$('.wrapper').delay(1600).fadeOut('fast', function () {
