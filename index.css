@@ -29,11 +29,18 @@ body::-webkit-scrollbar{
     animation-duration: 1.5s;
 }
 
-.toparrow{
+.arrow{
     position: absolute;
     top: 14vh;
+    z-index: 1;
+    height: 80vh;
+    width: 100%;
     text-align: right;
-    z-index: 10000;
+    padding-right: 10px;
+}
+
+.toparrow{
+    float: right;
 }
 
 .fa-angle-double-up{
@@ -52,10 +59,9 @@ body::-webkit-scrollbar{
 
 
 .bottomarrow{
-    position: absolute;
-    top: 80vh;
-    text-align: right;
-    z-index: 10000;
+    position: relative;
+    top: 70vh;
+    left: 40px;
 }
 
 @keyframes exmpl{
