@@ -7,6 +7,35 @@
     animation-duration: 1.5s;
 }
 
+.toparrow{
+    position: absolute;
+    top: 14vh;
+    text-align: right;
+    z-index: 10000;
+}
+
+.fa-angle-double-up{
+    color:darkcyan;
+}
+.fa-angle-double-up:hover{
+    color: cadetblue;
+}
+
+.fa-angle-double-down{
+    color:darkcyan;
+}
+.fa-angle-double-down:hover{
+    color: cadetblue;
+}
+
+
+.bottomarrow{
+    position: absolute;
+    top: 80vh;
+    text-align: right;
+    z-index: 10000;
+}
+
 @keyframes exmpl{
     from{opacity:0; transform: translateY(100px);}
     to{opacity:1; transform: translateY(0px); }
