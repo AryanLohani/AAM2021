@@ -1,7 +1,8 @@
 .section-3{
     width: 100%;
     height: 100vh;
-    padding: 5% 7%;
+    padding: 5% 9%;
+    position: absolute;
    
 }
 .space{
@@ -34,13 +35,16 @@
 }
 .imght600{
     height: 550px;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position:center center;
 }
 .imght292{
     height: 267px;
     
 }
 .imght550{
-    height: 550px;
+    height: 260px;
    
 }
 .abtus{
@@ -213,7 +217,9 @@ nav{
        margin-top: 5%;
    }
    .imght600{
-       height: 200px;
+    height: 200px;
+    background-size:100% 100%;
+    background-position:center center;
       
    }
    .imght292{
@@ -223,6 +229,12 @@ nav{
   }
   .imgg100{
     height: 200px;
+}
+.section-3{
+    width: 100%;
+    height: 100vh;
+    padding: 5% 7%;
+   
 }
  
 }

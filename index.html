@@ -99,6 +99,9 @@
 	</nav>
 
 	<!-- Preloader -->
+	<div class="div">
+		<img src="img/UPDATED.jpg" width="100%" height="600px" />
+	</div>
 	<div class="wrapper">
 		<div class="content">
 			<h1 style="color:white; margin-bottom:10vh">Welcome to the 18th Alumni Meet</h1>
@@ -283,25 +286,58 @@
 	<section class="section-3 pt-3">
 
 		<h1 class="gallery-h3 pt-5 text-center">Musical Night</h1>
-
-		<div class="row pt-3 ">
-			<div class="col-lg-6 col-md-6 col-sm-12">
+		<div class="row pt-3">
+			<div class="col-lg-4 col-md-4 col-sm-12">
 				<div class="image">
-					<img src="img/yellow-diary.jfif" width="100%" class="imght550" />
+					<div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat1.jpg');">
+					</div>
+					<div class="image__overlay image__overlay--primary text-center imght292">
+						<div class="image__title">Musical Night</div>
+						<p class="image__description"></p>
+					</div>
 				</div>
+
+
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-12">
-				<div class="image">
-					<img src="img/day2c/compressed day 2/yellow-diary.jpg" width="100%" class="imght550" />
+			<div class="col-lg-4 col-md-4 col-sm-12 ">
+				<div class="image mb-3">
+
+					<img src="img/day2c/compressed day 2/yellow-diary.jpg" width="100%" class="imght292">
+					<div class="image__overlay image__overlay--primary text-center imght292">
+						<div class="image__title">Musical Night</div>
+						<p class="image__description"></p>
+					</div>
+				</div>
+				<div class="image mb-2">
+					<img src="img/yellow-diary.jfif" width="100%" class="imght292">
+					<div class="image__overlay image__overlay--primary text-center text-center imght292">
+						<div class="image__title">Musical Night</div>
+						<p class="image__description">
+						</p>
+					</div>
+				</div>
+
+
+			</div>
+
+			<div class="col-lg-4 col-md-4 col-sm-12 ">
+				<div class="image ">
+					<div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat.jpg');">
+					</div>
+					<div class="image__overlay image__overlay--primary imght600">
+						<div class="image__title">Musical Night</div>
+					</div>
 				</div>
 			</div>
 		</div>
+
+
 
 	</section>
 	<section class="section-3 pt-3">
 
 		<h1 class="gallery-h3 pt-5 text-center">Hall Visit</h1>
-		<div class="row" pt-3>
+		<div class="row pt-3">
 			<div class="col-lg-4 col-md-4 col-sm-12">
 				<div class="image ">
 					<img src="img/day1c/compressed day 1/flames.jpg" width="100%" class="img100">
@@ -355,7 +391,8 @@
 		<div class="row pt-3">
 			<div class="col-lg-4 col-md-4 col-sm-12">
 				<div class="image">
-					<img src="img/day2c/compressed day 2/campus_tour.jpg" width="100%" class="imght600" />
+					<div class="imght600" style="background-image: url('img/day2c/compressed day 2/campus_tour.jpg');">
+					</div>
 					<div class="image__overlay image__overlay--primary text-center imght600">
 						<div class="image__title">Campus Tour</div>
 						<p class="image__description">Campus Tour is our way of showing the 2200
@@ -368,7 +405,7 @@
 
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-12 ">
-				<div class="image mb-2">
+				<div class="image mb-3">
 
 					<img src="img/day2c/compressed day 2/campus_tour2.jpg" width="100%" class="imght292">
 					<div class="image__overlay image__overlay--primary text-center imght292">
@@ -376,7 +413,7 @@
 						<p class="image__description"></p>
 					</div>
 				</div>
-				<div class="image mb-3">
+				<div class="image mb-2">
 					<img src="img/day2c/compressed day 2/nalanda.jpg" width="100%" class="imght292">
 					<div class="image__overlay image__overlay--primary text-center text-center imght292">
 						<div class="image__title">Campus Tour</div>
@@ -388,9 +425,10 @@
 
 			</div>
 
-			<div class="col-lg-4 col-md-4 col-sm-12">
-				<div class="image">
-					<img src="img/day2c/compressed day 2/football.jpg" width="100%" class="imght600" />
+			<div class="col-lg-4 col-md-4 col-sm-12 ">
+				<div class="image ">
+					<div class="imght600" style="background-image: url('img/day2c/compressed day 2/football.jpg');">
+					</div>
 					<div class="image__overlay image__overlay--primary imght600">
 						<div class="image__title">Campus Tour</div>
 						<p class="image__description text-center">In the progressive world we
@@ -432,7 +470,7 @@
 			for (let i = 0; i < 6; i++) {
 				document.getElementsByClassName("section-3")[i].style.display = "none";
 			}
-			document.getElementsByClassName("section-3")[x--].style.display = "block";
+			document.getElementsByClassName("section-3")[x++].style.display = "block";
 		}
 		$(window).on('load', function () {
 			if ($('.wrapper').length) {
