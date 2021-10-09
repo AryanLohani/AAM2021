@@ -4,11 +4,19 @@ body::-webkit-scrollbar{
 
 .section-3{
     width: 100%;
-    height: 100vh;
-    padding: 5% 7%;
-    opacity: 1;
+    height: 80vh;
+    margin-top: -2%;
+    padding: 0% 7%;
 
 }
+.coverimg{
+    width: 100%;
+    height: 86.3vh;
+}
+.bgimg2{
+   display: none;
+}
+
 /* .section-3:after{
     height: 100vh;
     width: 100vw;
@@ -20,14 +28,14 @@ body::-webkit-scrollbar{
     left: 0;
     pointer-events: none;
 } */
-.example{
+/* .example{
     animation-name: exmpl2;
     animation-duration: 1.5s;
 }
 .example2{
     animation-name: exmpl;
     animation-duration: 1.5s;
-}
+} */
 
 .arrow{
     position: absolute;
@@ -64,7 +72,7 @@ body::-webkit-scrollbar{
     left: 40px;
 }
 
-@keyframes exmpl{
+/* @keyframes exmpl{
     from{opacity:0; transform: translateY(100px);}
     to{opacity:1; transform: translateY(0px); }
 
@@ -72,7 +80,7 @@ body::-webkit-scrollbar{
 @keyframes exmpl2{
     from{opacity:1; transform: translateY(0px);}
     to{opacity:0; transform: translateY(-100px); }  
-}
+} */
 
 .space{
     height:0;
@@ -136,7 +144,7 @@ body::-webkit-scrollbar{
     position:relative;
 }
 .abtus{
-    padding: 6% 15%;
+    padding: 5% 15%;
     text-align: justify;
     line-height: 1.7;
 
@@ -254,6 +262,23 @@ nav{
     padding:  0  2.25em;
 }
 @media (max-width: 500px){
+    .coverimg{
+        width: 100%;
+        height: 40vh;
+    }
+    .bgimg2{
+        display: block;
+       height: 40vh;
+      
+       width: 100%;
+       background-image: url('./img/img.png');
+       background-size: 100% 100%;
+       background-repeat: no-repeat;
+       transform: rotate(-181deg);
+       text-shadow: 1px 2px 2px black,1px 2px 5px black,1px 2px 2px black; 
+     
+      
+    }
     .bgimg{
         position: relative;
         padding-top: 200px;

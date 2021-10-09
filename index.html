@@ -101,8 +101,11 @@
 	</nav>
 
 	<!-- Preloader -->
-	<div class="div">
-		<img src="img/UPDATED.jpg" width="100%" height="600px" />
+	<div class="cover page">
+		<img class="coverimg" src="img/cover.png" />
+		<div class=" col-sm-12 ">
+			<div class="bgimg2"></div>
+		</div>
 	</div>
 	<div class="wrapper">
 		<div class="content">
@@ -118,38 +121,42 @@
 	<!-- preloader ends -->
 	<!-- page content -->
 
-    <!--<section class="header" style="background-size: 100% 100%;background-position: center">
+	<!--<section class="header" style="background-size: 100% 100%;background-position: center">
         <img src="img/landing1.png" alt="header">
     </section>-->
-	<div class = "section1 section-3 page disable" style="background-image: url(img/bk.jpeg);background-color:rgba(255,255,255,0.85);background-size: 80% 100%;background-position: center;background-blend-mode:overlay">
-	   <!--<img src = "./img/bk.jpeg"/>-->
-	   <div class="row pt-3">
-		    <div class="col-lg-6 col-sm-12 ">
-			   <div class="bgimg"></div>
-		    </div>
-		    <div class="col-lg-6 col-sm-12">
-			    <div class="abtus">
-				   <h1 class="abt">About US</h1>
-				   <p class="abtContent">The Students' Alumni Cell, IIT
-					Kharagpur is a voluntary student body working under the aegis of the
-					Dean Outreach. It strives to bridge the gap between IIT Kharagpur and its esteemed alumni community.
+	<div class="section1 section-3 page disable"
+		style="background-image: url(img/bk.jpeg);background-color:rgba(255,255,255,0.85);background-size: 80% 100%;background-position: center;background-blend-mode:overlay;margin-top: 5%;">
+		<!--<img src = "./img/bk.jpeg"/>-->
+		<div class="row pt-3">
+			<div class="col-lg-6 col-sm-12 ">
+				<div class="bgimg"></div>
+			</div>
+			<div class="col-lg-6 col-sm-12">
+				<div class="abtus ">
+					<h1 class="abt">About US</h1>
+					<p class="abtContent">The Students' Alumni Cell, IIT
+						Kharagpur is a voluntary student body working under the aegis of the
+						Dean Outreach. It strives to bridge the gap between IIT Kharagpur and its esteemed alumni
+						community.
 
-					The Students' Alumni Cell continuously endeavours to strengthen the relations of the alumni of this
-					Institute and their alma mater. It has been instrumental in organising the Annual Alumni Meet,
-					Regional Student Alumni Meet, regular guest lectures by distinguished alumni in the campus,
-					Leadership Summit, publishing the annual literary magazine (Yearnings of Yore) & the annual
-					Yearbook. The Students' Alumni Cell also operates the Student - Alumni Mentorship Programme, My
-					Imprint (Giving Back - Alumni contribution) and organises Alvida (the annual farewell dinner).</p>
-			    </div>
-		    </div>
+						The Students' Alumni Cell continuously endeavours to strengthen the relations of the alumni of
+						this
+						Institute and their alma mater. It has been instrumental in organising the Annual Alumni Meet,
+						Regional Student Alumni Meet, regular guest lectures by distinguished alumni in the campus,
+						Leadership Summit, publishing the annual literary magazine (Yearnings of Yore) & the annual
+						Yearbook. The Students' Alumni Cell also operates the Student - Alumni Mentorship Programme, My
+						Imprint (Giving Back - Alumni contribution) and organises Alvida (the annual farewell dinner).
+					</p>
+				</div>
+			</div>
 		</div>
-    </div>
+	</div>
 	<div class="arrow">
-		<a type="button" onclick="prev()" class="toparrow"><i class="fa fa-angle-double-up fa-4x" ></i></a>
-		<a type="button" onclick="next()" class="bottomarrow"><i class="fa fa-angle-double-down fa-4x"></i></a>
+		<a type="button" onclick="Prev()" class="toparrow"><i class="fa fa-angle-double-up fa-4x"></i></a>
+		<a type="button" onclick="Next()" class="bottomarrow"><i class="fa fa-angle-double-down fa-4x"></i></a>
 	</div>
 
-	<section class="section-3 pt-3  page">
+	<section class="section-3  page">
 
 		<h1 class="gallery-h3 pt-5 text-center">Arena</h1>
 
@@ -205,7 +212,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3 page">
+	<section class="section-3 page">
 
 		<h1 class="gallery-h3 pt-5 text-center text-center">Grand Reunion</h1>
 
@@ -247,7 +254,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3 page">
+	<section class="section-3 page">
 
 		<h1 class=" gallery-h3 pt-5 text-center">Department Visit</h1>
 		<div class="row pt-3">
@@ -288,7 +295,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3 page">
+	<section class="section-3 page">
 
 		<h1 class="gallery-h3 pt-5 text-center">Musical Night</h1>
 		<div class="row pt-3">
@@ -339,7 +346,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3 z page">
+	<section class="section-3 z page">
 
 		<h1 class="gallery-h3 pt-5 text-center">Hall Visit</h1>
 		<div class="row pt-3">
@@ -365,7 +372,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" pt-3>
+		<div class="row pt-3">
 			<div class="col-lg-6 col-md-6 col-sm-12">
 				<div class="image mt-2">
 
@@ -390,7 +397,7 @@
 		</div>
 
 	</section>
-	<section class="section-3 pt-3 page">
+	<section class="section-3 page">
 
 		<h1 class="gallery-h3 pt-5 text-center">Campus Tour</h1>
 		<div class="row pt-3">
@@ -462,115 +469,153 @@
 	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
 	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
 	<script>
-		var j =3;
-		let x = 0
-		function next() {
-			x = x % 6;
-			for (let i = 0; i < 6; i++) {
-				document.getElementsByClassName("section-3")[i].style.display = "none";
+		var j = 3;
+		let x = 0;
+
+		// var arr = document.getElementsByClassName("page");
+		// for (var i = 0; i < arr.length; i++) {
+		// 	gsap.to(arr[i], {
+		// 		scrollTrigger: {
+		// 			trigger: arr[i],
+		// 			start: 'top 85%%',
+		// 			toggleActions: "play none play none"
+		// 		},
+		// 		opacity: 1,
+		// 		duration: 1.25,
+		// 		y: -50,
+		// 	}
+		// 	)
+		// };
+
+
+		const pages = document.getElementsByClassName("page");
+		const MAX_DELTA = 10;
+		var current = 0, delta = 0, size = pages.length;
+		console.log(size);
+
+		function Change(index) {
+
+			for (let i = 0; i < size; i++) {
+				pages[i].style.display = "none";
+			};
+			pages[index].style.display = "block";
+			if (index == 1) {
+
+				var arr2 = document.getElementsByClassName("bgimg")[0];
+				var arr3 = document.getElementsByClassName("abtus")[0];
+				gsap.from(arr2, {
+					scrollTrigger: {
+						trigger: [arr2],
+						start: 'top 80%',
+						toggleActions: "play none none none"
+					},
+					opacity: 0,
+					duration: 1.25,
+					x: 100
+				}
+				);
+				gsap.from(arr3, {
+					scrollTrigger: {
+						trigger: [arr3],
+						start: 'top 80%',
+						toggleActions: "play none none none"
+					},
+					opacity: 0,
+					duration: 1.25,
+					x: 100
+				}
+				);
 			}
-			document.getElementsByClassName("section-3")[x++].style.display = "block";
-		};
-		function prev() {
-			x = (x < 0) ? 5 : x;
-			for (let i = 0; i < 6; i++) {
-				document.getElementsByClassName("section-3")[i].style.display = "none";
+			else {
+				pages[index].style.display = "block";
+				gsap.from(pages[index], {
+					scrollTrigger: {
+						trigger: [pages[index]],
+						start: 'top 100%',
+						toggleActions: "play none none none"
+					},
+					opacity: 0,
+					duration: 1.25,
+					y: 100
+				}
+				);
+
 			}
-			document.getElementsByClassName("section-3")[x++].style.display = "block";
+
+			current = index;
+			delta = 0;
 		}
+		function Next() {
+			if (current + 1 == size) current = 0;
+			console.log("Next");
+			Change(current + 1);
+		};
+		function Prev() {
+			if (current - 1 <= 0) current = pages.length;
+			Change(current - 1);
+		};
 
-var arr = document.getElementsByClassName("page");
-    for(var i =0;i<arr.length;i++){
-        gsap.to(arr[i], {
-        scrollTrigger: {
-        trigger: arr[i],
-        start:'top 85%%',
-        toggleActions: "play none play none"
-           },
-        opacity:1,
-        duration:1.25,
-		y: -50,
-         }
-		)};
+		$(".page").bind('mousewheel', function (e) {
+			if (j > 0) {
+				if (e.originalEvent.wheelDelta < 0) {
+					//scroll down
+					delta = Math.max(delta + 1, 1);
+					if (delta >= MAX_DELTA) {
+						console.log(current);
+						Next();
+						j = 0;
+						setTimeout(disable, 2000);
 
+					}
+				} else {
+					//scroll up
+					delta = Math.min(delta - 1, -1);
+					if (delta <= -MAX_DELTA) {
+						Prev();
+						j = 0;
+						setTimeout(disable, 2000);
 
-const pages = document.getElementsByClassName("page");
-const MAX_DELTA = 10;
-var current = 0, delta = 0, size = pages.length;
-console.log(size);
-
-function Change(index) {
-
-    pages[current].style.display = "none";
-    pages[index].style.display = "block";
-    current = index;
-    delta = 0;
-}
-function Next() {
-    if (current + 1 == size) return;
-    Change(current + 1);
-};
-function Prev() {
-    if (current - 1 < 0) return;
-    Change(current - 1);
-};
-
-$(".page").bind('mousewheel', function (e) {
-	if(j>0){
-    if (e.originalEvent.wheelDelta < 0) {
-        //scroll down
-        delta = Math.max(delta + 1, 1);
-        if (delta >= MAX_DELTA) {
-			console.log(current);
-        Next();
-		j=0;
-		setTimeout( disable, 2000  ); 
-        }
-    } else {
-        //scroll up
-        delta = Math.min(delta - 1, -1);
-        if (delta <= -MAX_DELTA) {
-            Prev();
-			j=0;
-			setTimeout( disable, 2000  ); 
-        }
-    }
-}
-	return false;
-});
+					}
+				}
+			}
+			return false;
+		});
 
 
 
-var arr2 = document.getElementsByClassName("bgimg");
- var arr3 = document.getElementsByClassName("abtus");   
-        gsap.from(arr2, {
-        scrollTrigger: {
-        trigger: [arr2],
-        start:'top 80%',
-        toggleActions: "play none none none"
-           },
-        opacity:0,
-        duration:1.25,
-		x:100
-         }
+		var arr2 = document.getElementsByClassName("bgimg");
+		var arr3 = document.getElementsByClassName("abtus");
+		gsap.from(arr2, {
+			scrollTrigger: {
+				trigger: [arr2],
+				start: 'top 80%',
+				toggleActions: "play none none none"
+			},
+			opacity: 0,
+			duration: 1.25,
+			x: 100
+		}
 		);
 		gsap.from(arr3, {
-        scrollTrigger: {
-        trigger: [arr3],
-        start:'top 80%',
-        toggleActions: "play none none none"
-           },
-        opacity:0,
-        duration:1.25,
-		x:100
-         }
+			scrollTrigger: {
+				trigger: [arr3],
+				start: 'top 80%',
+				toggleActions: "play none none none"
+			},
+			opacity: 0,
+			duration: 1.25,
+			x: 100
+		}
 		);
-		function disable(){
+		function disable() {
 			j++;
 		}
 
 
 		$(window).on('load', function () {
+			for (let i = 1; i < size; i++) {
+				pages[i].style.display = "none";
+			}
 			if ($('.wrapper').length) {
 				$('.wrapper').delay(1600).fadeOut('fast', function () {
 					$(this).remove();
