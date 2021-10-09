@@ -1,11 +1,6 @@
 .section-3{
     width: 100%;
     height: 100vh;
-<<<<<<< HEAD
-    padding: 5% 9%;
-    position: absolute;
-   
-=======
     padding: 5% 7%;
     opacity: 1;
     animation-name: exmpl;
@@ -20,7 +15,6 @@
 @keyframes exmpl2{
     from{opacity:0; transform: translateY(-100px);}
     to{opacity:1; transform: translateY(0px); }  
->>>>>>> a8daf0049e4931bc6ba6d707d77bb47a530054d6
 }
 
 .space{
