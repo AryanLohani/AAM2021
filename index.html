@@ -21,6 +21,8 @@
 	<link href="index.css" rel="stylesheet">
 	<link href="navbar.css" rel="stylesheet">
 	<link href="preloader.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body onload="next()">
@@ -119,7 +121,7 @@
     <!--<section class="header" style="background-size: 100% 100%;background-position: center">
         <img src="img/landing1.png" alt="header">
     </section>-->
-	<div class = "section1" style="background-image: url(img/bk.jpeg);background-color:rgba(255,255,255,0.85);background-size: 80% 100%;background-position: center;background-blend-mode:overlay">
+	<div class = "section1 section-3 page disable" style="background-image: url(img/bk.jpeg);background-color:rgba(255,255,255,0.85);background-size: 80% 100%;background-position: center;background-blend-mode:overlay">
 	   <!--<img src = "./img/bk.jpeg"/>-->
 	   <div class="row pt-3">
 		    <div class="col-lg-6 col-sm-12 ">
@@ -142,12 +144,12 @@
 		    </div>
 		</div>
     </div>
-	<div class="d-flex">
-		<button type="button" onclick="prev()" style="margin: 0 auto;">prev</button>
-		<button type="button" onclick="next()" style="margin: 0 auto;">Next</button>
+	<div class="arrow">
+		<a type="button" onclick="prev()" class="toparrow"><i class="fa fa-angle-double-up fa-4x" ></i></a>
+		<a type="button" onclick="next()" class="bottomarrow"><i class="fa fa-angle-double-down fa-4x"></i></a>
 	</div>
 
-	<section class="section-3 pt-3 arex">
+	<section class="section-3 pt-3  page">
 
 		<h1 class="gallery-h3 pt-5 text-center">Arena</h1>
 
@@ -203,7 +205,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3 z">
+	<section class="section-3 pt-3 page">
 
 		<h1 class="gallery-h3 pt-5 text-center text-center">Grand Reunion</h1>
 
@@ -245,7 +247,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3 z">
+	<section class="section-3 pt-3 page">
 
 		<h1 class=" gallery-h3 pt-5 text-center">Department Visit</h1>
 		<div class="row pt-3">
@@ -286,7 +288,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3 z">
+	<section class="section-3 pt-3 page">
 
 		<h1 class="gallery-h3 pt-5 text-center">Musical Night</h1>
 		<div class="row pt-3">
@@ -337,7 +339,7 @@
 
 
 	</section>
-	<section class="section-3 pt-3 z">
+	<section class="section-3 pt-3 z page">
 
 		<h1 class="gallery-h3 pt-5 text-center">Hall Visit</h1>
 		<div class="row pt-3">
@@ -388,7 +390,7 @@
 		</div>
 
 	</section>
-	<section class="section-3 pt-3 z">
+	<section class="section-3 pt-3 page">
 
 		<h1 class="gallery-h3 pt-5 text-center">Campus Tour</h1>
 		<div class="row pt-3">
@@ -460,6 +462,7 @@
 	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
 	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
 	<script>
+		var j =3;
 		let x = 0
 		function next() {
 			x = x % 6;
@@ -475,43 +478,68 @@
 			}
 			document.getElementsByClassName("section-3")[x++].style.display = "block";
 		}
-		let y =0;
-		$('.section-3').bind('mousewheel', function(e){
-     if(e.originalEvent.wheelDelta < 0) {
-         //scroll down
-		 var ex = document.getElementsByClassName('section3')
-		 y++;
-		 if(y>30){
-		 next();
-		 y=0;
-         console.log('Down');}
-     }else {
-         //scroll up
-		
-		 y++;
-		 if(y>30){
-		 prev();
-		 y=0;
-         console.log('Up');}
-     }
 
-     //prevent page fom scrolling
-     return false;
- });
-
-var arr = document.getElementsByClassName("arex");
-    
-        gsap.to(arr, {
+var arr = document.getElementsByClassName("page");
+    for(var i =0;i<arr.length;i++){
+        gsap.to(arr[i], {
         scrollTrigger: {
-        trigger: arr,
-        start:'top 80%',
-        toggleActions: "play none none none"
+        trigger: arr[i],
+        start:'top 85%%',
+        toggleActions: "play none play none"
            },
         opacity:1,
         duration:1.25,
-		y:50,
+		y: -50,
          }
-		);
+		)};
+
+
+const pages = document.getElementsByClassName("page");
+const MAX_DELTA = 10;
+var current = 0, delta = 0, size = pages.length;
+console.log(size);
+
+function Change(index) {
+
+    pages[current].style.display = "none";
+    pages[index].style.display = "block";
+    current = index;
+    delta = 0;
+}
+function Next() {
+    if (current + 1 == size) return;
+    Change(current + 1);
+};
+function Prev() {
+    if (current - 1 < 0) return;
+    Change(current - 1);
+};
+
+$(".page").bind('mousewheel', function (e) {
+	if(j>0){
+    if (e.originalEvent.wheelDelta < 0) {
+        //scroll down
+        delta = Math.max(delta + 1, 1);
+        if (delta >= MAX_DELTA) {
+			console.log(current);
+        Next();
+		j=0;
+		setTimeout( disable, 2000  ); 
+        }
+    } else {
+        //scroll up
+        delta = Math.min(delta - 1, -1);
+        if (delta <= -MAX_DELTA) {
+            Prev();
+			j=0;
+			setTimeout( disable, 2000  ); 
+        }
+    }
+}
+	return false;
+});
+
+
 
 var arr2 = document.getElementsByClassName("bgimg");
  var arr3 = document.getElementsByClassName("abtus");   
@@ -537,6 +565,10 @@ var arr2 = document.getElementsByClassName("bgimg");
 		x:100
          }
 		);
+		function disable(){
+			j++;
+		}
+
 
 		$(window).on('load', function () {
 			if ($('.wrapper').length) {
@@ -549,6 +581,8 @@ var arr2 = document.getElementsByClassName("bgimg");
 		window.addEventListener('scroll', function () {
 			gsap.to(window, { duration: 1, scrollTo: { y: "#section" + (index + 1), offsetY: 70 } });
 		})
+
+
 	</script>
 </body>
 
