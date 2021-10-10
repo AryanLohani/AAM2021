@@ -46,13 +46,14 @@ padding: 0% 10%;
 
 .arrow{
     position: absolute;
-    top: 14vh;
+    bottom: 1vh;
     z-index: 1;
     height: 80vh;
-    width: 5%;
+    width: 50%;
     text-align: right;
     padding-right: 10px;
-    left: 50vw;
+    margin: auto;
+
 }
 
 .toparrow{
@@ -69,7 +70,7 @@ padding: 0% 10%;
 }
 
 .fa-angle-double-down{
-    color:rgb(194, 194, 194);
+    color:rgb(233, 233, 233);
 }
 .fa-angle-double-down:hover{
     color: rgb(255, 255, 255);
@@ -77,9 +78,10 @@ padding: 0% 10%;
 
 
 .bottomarrow{
-    position: relative;
-    top: 77vh;
-    left: 40px;
+    position: fixed;
+    bottom: 3vh;
+    left: 50%;
+    z-index: 5;
 }
 
 /* @keyframes exmpl{
