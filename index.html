@@ -39,6 +39,7 @@
 			</button>
 			<div class="navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
 				<ul class="navbar-nav ml-auto">
+					<li onclick="Prev()" class="nav-item">prev</li>
 					<li class="nav-item active"> <a class="nav-link" href="index.php">Home </a> </li>
 					<li class="nav-item dropdown">
 						<a class="nav-link" href="#" data-bs-toggle="dropdown"> Events </a>
@@ -173,13 +174,13 @@
 		</section>
 	</div>
 	<!-- <div class="arrow"> -->
-	<!-- <a type="button" onclick="Prev()" class="toparrow"><i class="fa fa-angle-double-up fa-3x"></i></a> -->
+
 	<a type="button" onclick="Next()" class="bottomarrow "><i class="fa fa-angle-double-down fa-3x"></i></a>
 	<!-- </div> -->
 
 	<section class="section-3  page">
 
-		<h1 class="fadet gallery-h3 pt-5 text-center">Arena</h1>
+		<h1 class="fadet gallery-h3 pt-2 text-center">Arena</h1>
 
 		<section class="fadei">
 			<div class="row pt-3">
@@ -243,7 +244,7 @@
 	</section>
 	<section class="section-3 page">
 
-		<h1 class="fadet gallery-h3 pt-5 text-center text-center">Grand Reunion</h1>
+		<h1 class="fadet gallery-h3 pt-2 text-center text-center">Grand Reunion</h1>
 
 		<section class="fadei">
 			<div class="row pt-3">
@@ -289,7 +290,7 @@
 	</section>
 	<section class="section-3 page">
 
-		<h1 class="fadet  gallery-h3 pt-5 text-center">Department Visit</h1>
+		<h1 class="fadet  gallery-h3 pt-2 text-center">Department Visit</h1>
 		<section class="fadei">
 			<div class="row pt-3">
 				<div class="col-lg-8 col-md-8 col-sm-12">
@@ -332,7 +333,7 @@
 	</section>
 	<section class="section-3 page">
 
-		<h1 class="fadet gallery-h3 pt-5 text-center">Musical Night</h1>
+		<h1 class="fadet gallery-h3 pt-2 text-center">Musical Night</h1>
 		<section class="fadei">
 			<div class="row pt-3">
 				<div class="col-lg-4 col-md-4 col-sm-12">
@@ -384,7 +385,7 @@
 	</section>
 	<section class="section-3 z page">
 
-		<h1 class="fadet gallery-h3 pt-5 text-center">Hall Visit</h1>
+		<h1 class="fadet gallery-h3 pt-2 text-center">Hall Visit</h1>
 		<section class="fadei">
 			<div class="row pt-3">
 				<div class="col-lg-8 col-md-8 col-sm-12">
@@ -470,7 +471,7 @@
 	</section>
 	<section class="section-3 page">
 
-		<h1 class="fadet gallery-h3 pt-5 text-center">Campus Tour</h1>
+		<h1 class="fadet gallery-h3 pt-2 text-center">Campus Tour</h1>
 		<section class="fadei">
 			<div class="row pt-3">
 				<div class="col-lg-4 col-md-4 col-sm-12">
@@ -545,6 +546,7 @@
 		function fadeHeading(fadeIndex) {
 			let promise = new Promise((resolve, reject) => {
 				let fadeOutt = document.getElementsByClassName("fadet");
+				console.log(fadeOutt[fadeIndex]);
 				gsap.to(fadeOutt[fadeIndex], {
 					scrollTrigger: {
 						trigger: [fadeOutt[fadeIndex]],
@@ -581,15 +583,15 @@
 		}
 		function fadeInHeading(index) {
 			if (index > 5) return;
-			console.log("inside fadein" + index);
+
 			let promise = new Promise((resolve, reject) => {
 				let fadeint = document.getElementsByClassName("fadet");
 				fadeint[index].style.display = "block";
-
+				fadeint[index].style.opacity = "1";
 				gsap.from(fadeint[index], {
 					scrollTrigger: {
 						trigger: [fadeint[index]],
-						start: 'top 100%',
+						start: 'top 80%',
 						toggleActions: "play none none none"
 					},
 					opacity: 0,
@@ -603,10 +605,12 @@
 		}
 		function fadeInImage(index) {
 			if (index > 6) return;
-			console.log("inside fadein" + index);
+
 			let promise = new Promise((resolve, reject) => {
 				let fadeini = document.getElementsByClassName("fadei");
 				fadeini[index].style.display = "block";
+				fadeini[index].style.opacity = "1";
+
 				gsap.from(fadeini[index], {
 					scrollTrigger: {
 						trigger: [fadeini[index]],
@@ -625,8 +629,16 @@
 
 		function Change(index) {
 
+			current = index;
+			console.log(index, current);
+			delta = 0;
 			for (let i = 0; i < size; i++) {
 				pages[i].style.display = "none";
+				pages[i].style.opacity = "1";
+				pages[i].style.position = "absolute";
+				pages[i].style.top = "18%";
+				// pages[i].style.marginTop = "2%";
+				// if (i == 5) { pages[i].style.top = "15%"; }
 			};
 
 
@@ -635,6 +647,9 @@
 				var fadeh = document.getElementsByClassName("fadeh")[0];
 				var fadec = document.getElementsByClassName("fadec")[0];
 				var fadev = document.getElementsByClassName("fadev")[0];
+
+				fadeh.style.opacity = "1";
+
 				fadeh.style.display = "block";
 				fadec.style.display = "none";
 				fadev.style.display = "none";
@@ -646,11 +661,11 @@
 					},
 					opacity: 1,
 					duration: 1,
-					x: 100
+					x: 50
 				}
 				);
 				setTimeout(() => {
-					fadec.style.display = "block";
+					fadec.style.display = "block"; fadec.style.opacity = "1";
 					gsap.from(fadec, {
 						scrollTrigger: {
 							trigger: [fadec],
@@ -659,12 +674,13 @@
 						},
 						opacity: 0,
 						duration: 1,
-						x: 100
+						x: 50
 					}
 					);
 				}, 900)
 				setTimeout(() => {
 					fadev.style.display = "block";
+					fadev.style.opacity = "1";
 					gsap.from(fadev, {
 						scrollTrigger: {
 							trigger: [fadev],
@@ -673,7 +689,7 @@
 						},
 						opacity: 0,
 						duration: 1,
-						x: 100
+						x: 50
 					}
 					);
 				}, 1500)
@@ -682,16 +698,27 @@
 			else {
 				let fadeint = document.getElementsByClassName("fadet");
 				let fadeini = document.getElementsByClassName("fadei");
+				for (i = 0; i < fadeini.length; i++) {
+					fadeini[i].style.opacity = "1";
+					fadeini[i].style.opacity = "1";
+				}
 
 				if (index == 2) {
 					pages[index - 1].style.display = "block";
 					pages[index].style.display = "block";
 					fadeint[index - 2].style.display = "none";
+
 					fadeini[index - 2].style.display = "none";
-					console.log(fadeint[index - 2]);
+
+
 					var fadeh = document.getElementsByClassName("fadeh")[0];
 					var fadec = document.getElementsByClassName("fadec")[0];
 					var fadev = document.getElementsByClassName("fadev")[0];
+					fadeh.style.opacity = "1";
+					fadec.style.opacity = "1";
+					// fadec.style.position = "absolute";
+					// fadec.style.left = "10%";
+					fadev.style.opacity = "1";
 					gsap.to(fadeh, {
 						scrollTrigger: {
 							trigger: [fadeh],
@@ -700,7 +727,7 @@
 						},
 						opacity: 0,
 						duration: 1,
-						x: -100
+						x: -50
 					}
 					);
 					setTimeout(() => {
@@ -713,7 +740,7 @@
 							},
 							opacity: 0,
 							duration: 1,
-							x: -100
+							x: -50
 						}
 						);
 					}, 900)
@@ -732,46 +759,197 @@
 						);
 					}, 1500);
 					setTimeout(() => { pages[index - 1].style.display = "none"; }, 1900);
+					setTimeout(() => { fadeInHeading(index - 2).then().catch(err => console.log(err)); }, 2000)
+					setTimeout(() => { fadeInImage(index - 2).then().catch(err => console.log(err)); }, 2502);
 
-					setTimeout(() => { fadeInHeading(index - 2).then(() => { console.log("success in text of in" + (current - 1)) }).catch(err => console.log(err)); }, 2000)
-					setTimeout(() => { fadeInImage(index - 2).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
-					console.log(fadeint[index - 1]);
 				}
 				else {
 					pages[index - 1].style.display = "block";
 					pages[index].style.display = "block";
 					fadeint[index - 2].style.display = "none";
 					fadeini[index - 2].style.display = "none";
-					console.log(fadeint[index - 1], fadeini[index - 1]);
-					fadeHeading(index - 3).then(() => { console.log("success in text") }).catch(err => console.log(err)); setTimeout(() => {
-						fadeImage(index - 3).then(() => { console.log("success in image"); }).catch(err => console.log(err));
+
+					fadeHeading(index - 3).then().catch(err => console.log(err));
+					setTimeout(() => {
+						fadeImage(index - 3).then().catch(err => console.log(err));
 
 					}, 600);
 
-
 					setTimeout(() => { pages[index - 1].style.display = "none"; }, 1400);
 
-					setTimeout(() => { fadeInHeading(index - 2).then(() => { console.log("success in text of in") }).catch(err => console.log(err)); }, 1400)
-					setTimeout(() => { fadeInImage(index - 2).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2002);
+					setTimeout(() => { fadeInHeading(index - 2).then().catch(err => console.log(err)); }, 1400)
+					setTimeout(() => { fadeInImage(index - 2).then().catch(err => console.log(err)); }, 2002);
 				}
 
 
 			}
 
+
+		}
+		function Changeprev(index) {
+
 			current = index;
+			console.log(index, current);
 			delta = 0;
+			let fadei = document.getElementsByClassName("fadei");
+			let fadet = document.getElementsByClassName("fadet");
+
+			for (let i = 0; i < size; i++) {
+				pages[i].style.display = "none";
+				pages[i].style.opacity = "1";
+				pages[i].style.position = "absolute";
+				pages[i].style.marginTop = "2%";
+				if (i == 0) { pages[i].style.marginTop = "-2%"; }
+
+
+
+				if (i >= 2) {
+					fadei[i - 2].style.opacity = "1";
+					fadet[i - 2].style.opacity = "1";
+				}
+			};
+			if (index == 0) {
+				pages[index + 1].style.display = "block";
+				var fadeh = document.getElementsByClassName("fadeh")[0];
+				var fadec = document.getElementsByClassName("fadec")[0];
+				var fadev = document.getElementsByClassName("fadev")[0];
+
+				gsap.to(fadeh, {
+					scrollTrigger: {
+						trigger: [fadeh],
+						start: 'top 80%',
+						toggleActions: "play none none none"
+					},
+					opacity: 0,
+					duration: 0.9,
+					x: 50
+				}
+				);
+				setTimeout(() => {
+
+					gsap.to(fadec, {
+						scrollTrigger: {
+							trigger: [fadec],
+							start: 'top 80%',
+							toggleActions: "play none none none"
+						},
+						opacity: 0,
+						duration: 0.98,
+						x: 50
+					}
+					);
+				}, 1000)
+				setTimeout(() => {
+
+					gsap.to(fadev, {
+						scrollTrigger: {
+							trigger: [fadev],
+							start: 'top 80%',
+							toggleActions: "play none none none"
+						},
+						opacity: 0,
+						duration: 1,
+						x: 50
+					}
+					);
+				}, 1500);
+				setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 2000);
+			}
+			if (index == 1) {
+				pages[index + 1].style.display = "block";
+				let fadeh = document.getElementsByClassName("fadeh")[0];
+				let fadec = document.getElementsByClassName("fadec")[0];
+				let fadev = document.getElementsByClassName("fadev")[0];
+				fadeh.style.display = "none";
+				fadec.style.display = "none";
+				fadev.style.display = "none";
+
+				fadeHeading(index - 1).then().catch(err => console.log(err));
+				setTimeout(() => {
+					fadeImage(index - 1).then().catch(err => console.log(err));
+
+				}, 600);
+
+				setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1400);
+				setTimeout(() => {
+					fadeh.style.display = "block";
+					fadeh.style.opacity = "1";
+
+					gsap.from(fadeh, {
+						scrollTrigger: {
+							trigger: [fadeh],
+							start: 'top 80%',
+							toggleActions: "play none none none"
+						},
+						opacity: 0,
+						duration: 1,
+						x: 100
+					}
+					);
+
+				}, 1402);
+				setTimeout(() => {
+					fadec.style.display = "block";
+					fadec.style.opacity = "1";
+					gsap.from(fadec, {
+						scrollTrigger: {
+							trigger: [fadec],
+							start: 'top 80%',
+							toggleActions: "play none none none"
+						},
+						opacity: 0,
+						duration: 1,
+						x: 100
+					}
+					);
+
+				}, 2000);
+				setTimeout(() => {
+					fadev.style.display = "block";
+					fadev.style.opacity = "1";
+					gsap.from(fadev, {
+						scrollTrigger: {
+							trigger: [fadev],
+							start: 'top 80%',
+							toggleActions: "play none none none"
+						},
+						opacity: 0,
+						duration: 1,
+						x: 100
+					}
+					);
+
+				}, 2000);
+			} else {
+				pages[index + 1].style.display = "block";
+				fadei[index - 2].style.display = "none";
+				fadet[index - 2].style.display = "none";
+				fadeHeading(index - 1).then().catch(err => console.log(err));
+				setTimeout(() => {
+					fadeImage(index - 1).then().catch(err => console.log(err));
+
+				}, 600);
+
+				setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1400);
+
+				setTimeout(() => { fadeInHeading(index - 2).then().catch(err => console.log(err)); }, 1400)
+				setTimeout(() => { fadeInImage(index - 2).then().catch(err => console.log(err)); }, 2002);
+
+			}
+
+
+
+
 		}
 		function Next() {
 			if (current + 1 == size) return;
-			console.log("Next");
+
 			Change(current + 1);
 		};
-		function next() {
 
-		}
 		function Prev() {
 			if (current - 1 < 0) return;
-			Change(current - 1);
+			Changeprev(current - 1);
 		};
 
 		$(".page").bind('mousewheel', function (e) {
