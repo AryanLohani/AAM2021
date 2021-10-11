@@ -645,7 +645,7 @@
 						toggleActions: "play none none none"
 					},
 					opacity: 1,
-					duration: 1.25,
+					duration: 1,
 					x: 100
 				}
 				);
@@ -658,7 +658,7 @@
 							toggleActions: "play none none none"
 						},
 						opacity: 0,
-						duration: 1.25,
+						duration: 1,
 						x: 100
 					}
 					);
@@ -672,7 +672,7 @@
 							toggleActions: "play none none none"
 						},
 						opacity: 0,
-						duration: 1.25,
+						duration: 1,
 						x: 100
 					}
 					);
@@ -684,10 +684,10 @@
 				let fadeini = document.getElementsByClassName("fadei");
 
 				if (index == 2) {
-					pages[current].style.display = "block";
-					pages[current + 1].style.display = "block";
-					fadeint[current - 1].style.display = "none";
-					fadeini[current - 1].style.display = "none";
+					pages[index - 1].style.display = "block";
+					pages[index].style.display = "block";
+					fadeint[index - 2].style.display = "none";
+					fadeini[index - 2].style.display = "none";
 					console.log(fadeint[index - 2]);
 					var fadeh = document.getElementsByClassName("fadeh")[0];
 					var fadec = document.getElementsByClassName("fadec")[0];
@@ -731,28 +731,28 @@
 						}
 						);
 					}, 1500);
-					setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+					setTimeout(() => { pages[index - 1].style.display = "none"; }, 1900);
 
-					setTimeout(() => { fadeInHeading(current - 1).then(() => { console.log("success in text of in" + (current - 1)) }).catch(err => console.log(err)); }, 2000)
-					setTimeout(() => { fadeInImage(current - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+					setTimeout(() => { fadeInHeading(index - 2).then(() => { console.log("success in text of in" + (current - 1)) }).catch(err => console.log(err)); }, 2000)
+					setTimeout(() => { fadeInImage(index - 2).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
 					console.log(fadeint[index - 1]);
 				}
 				else {
+					pages[index - 1].style.display = "block";
 					pages[index].style.display = "block";
-					pages[index + 1].style.display = "block";
-					fadeint[index - 1].style.display = "none";
-					fadeini[index - 1].style.display = "none";
+					fadeint[index - 2].style.display = "none";
+					fadeini[index - 2].style.display = "none";
 					console.log(fadeint[index - 1], fadeini[index - 1]);
-					fadeHeading(index - 2).then(() => { console.log("success in text") }).catch(err => console.log(err)); setTimeout(() => {
-						fadeImage(index - 2).then(() => { console.log("success in image"); }).catch(err => console.log(err));
+					fadeHeading(index - 3).then(() => { console.log("success in text") }).catch(err => console.log(err)); setTimeout(() => {
+						fadeImage(index - 3).then(() => { console.log("success in image"); }).catch(err => console.log(err));
 
-					}, 1000);
+					}, 600);
 
 
-					setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+					setTimeout(() => { pages[index - 1].style.display = "none"; }, 1400);
 
-					setTimeout(() => { fadeInHeading(index - 1).then(() => { console.log("success in text of in") }).catch(err => console.log(err)); }, 2000)
-					setTimeout(() => { fadeInImage(index - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+					setTimeout(() => { fadeInHeading(index - 2).then(() => { console.log("success in text of in") }).catch(err => console.log(err)); }, 1400)
+					setTimeout(() => { fadeInImage(index - 2).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2002);
 				}
 
 
@@ -766,6 +766,9 @@
 			console.log("Next");
 			Change(current + 1);
 		};
+		function next() {
+
+		}
 		function Prev() {
 			if (current - 1 < 0) return;
 			Change(current - 1);

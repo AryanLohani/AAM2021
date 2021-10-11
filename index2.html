@@ -595,7 +595,7 @@
                     opacity: 0,
 
                     duration: 0.5,
-                    y: -50,
+                    y: 100,
                 });
                 resolve();
             });
@@ -685,9 +685,10 @@
 
                 if (index == 2) {
                     pages[current].style.display = "block";
-                    pages[index].style.display = "block";
-                    fadeint[index - 2].style.display = "block";
-                    fadeini[index - 2].style.display = "block";
+                    pages[current + 1].style.display = "block";
+                    fadeint[current - 1].style.display = "none";
+                    fadeini[current - 1].style.display = "none";
+                    console.log(fadeint[index - 2]);
                     var fadeh = document.getElementsByClassName("fadeh")[0];
                     var fadec = document.getElementsByClassName("fadec")[0];
                     var fadev = document.getElementsByClassName("fadev")[0];
@@ -698,7 +699,7 @@
                             toggleActions: "play none none none"
                         },
                         opacity: 0,
-                        duration: 1.25,
+                        duration: 1,
                         x: -100
                     }
                     );
@@ -711,7 +712,7 @@
                                 toggleActions: "play none none none"
                             },
                             opacity: 0,
-                            duration: 1.25,
+                            duration: 1,
                             x: -100
                         }
                         );
@@ -725,31 +726,3433 @@
                                 toggleActions: "play none none none"
                             },
                             opacity: 0,
-                            duration: 1.25,
+                            duration: 1,
                             x: -100
                         }
                         );
                     }, 1500);
                     setTimeout(() => { pages[current].style.display = "none"; }, 1900);
 
-                    setTimeout(() => { fadeInHeading(index - 2).then(() => { console.log("success in text of in" + (index - 2)) }).catch(err => console.log(err)); }, 2000)
-                    setTimeout(() => { fadeInImage(index - 2).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                    setTimeout(() => { fadeInHeading(current - 1).then(() => { console.log("success in text of in" + (current - 1)) }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(current - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                    console.log(fadeint[index - 1]);
                 }
                 else {
-                    pages[current].style.display = "block";
                     pages[index].style.display = "block";
-                    fadeint[index - 2].style.display = "block";
-                    fadeini[index - 2].style.display = "block";
-                    fadeHeading(index - 3).then(() => { console.log("success in text") }).catch(err => console.log(err)); setTimeout(() => {
-                        fadeImage(index - 3).then(() => { console.log("success in image"); }).catch(err => console.log(err));
+                    pages[index + 1].style.display = "block";
+                    fadeint[index - 1].style.display = "none";
+                    fadeini[index - 1].style.display = "none";
+                    console.log(fadeint[index - 1], fadeini[index - 1]);
+                    fadeHeading(index - 2).then(() => { console.log("success in text") }).catch(err => console.log(err)); setTimeout(() => {
+                        fadeImage(index - 2).then(() => { console.log("success in image"); }).catch(err => console.log(err));
 
                     }, 1000);
 
 
                     setTimeout(() => { pages[current].style.display = "none"; }, 1900);
 
-                    setTimeout(() => { fadeInHeading(index - 2).then(() => { console.log("success in text of in") }).catch(err => console.log(err)); }, 2000)
-                    setTimeout(() => { fadeInImage(index - 2).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                    setTimeout(() => { fadeInHeading(index - 1).then(() => { console.log("success in text of in") }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(index - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                }
+
+
+            }
+
+            current = index;
+            delta = 0;
+        }
+        function Next() {
+            if (current + 1 == size) return;
+            console.log("Next");
+            Change(current + 1);
+        };
+        function Prev() {
+            if (current - 1 < 0) return;
+            Change(current - 1);
+        };
+
+        $(".page").bind('mousewheel', function (e) {
+            if (j > 0) {
+                if (e.originalEvent.wheelDelta < 0) {
+                    //scroll down
+                    delta = Math.max(delta + 1, 1);
+                    if (delta >= MAX_DELTA) {
+                        console.log(current);
+                        Next();
+                        j = 0;
+                        setTimeout(disable, 2000);
+
+                    }
+                } else {
+                    //scroll up
+                    delta = Math.min(delta - 1, -1);
+                    if (delta <= -MAX_DELTA) {
+                        Prev();
+                        j = 0;
+                        setTimeout(disable, 2000);
+
+                    }
+                }
+            }
+            return false;
+        });
+
+
+
+        var arr2 = document.getElementsByClassName("bgimg");
+        var arr3 = document.getElementsByClassName("abtus");
+        gsap.from(arr2, {
+            scrollTrigger: {
+                trigger: [arr2],
+                start: 'top 80%',
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            duration: 1.25,
+            x: 100
+        }
+        );
+        gsap.from(arr3, {
+            scrollTrigger: {
+                trigger: [arr3],
+                start: 'top 80%',
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            duration: 1.25,
+            x: 100
+        }
+        );
+        function disable() {
+            j++;
+        }
+
+
+        $(window).on('load', function () {
+            for (let i = 1; i < size; i++) {
+                pages[i].style.display = "none";
+            }
+            if ($('.wrapper').length) {
+                $('.wrapper').delay(1600).fadeOut('fast', function () {
+                    $(this).remove();
+                });
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            gsap.to(window, { duration: 1, scrollTo: { y: "#section" + (index + 1), offsetY: 70 } });
+        })
+
+
+    </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Alumni Meet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link href="index.css" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    <link href="preloader.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+
+        <div class="container-fluid">
+            <a class="navbar-brand xyz" href="#"><img src="img/latestlogo.jpeg"></a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
+				aria-expanded="false" aria-label="Toggle navigation"> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"> <a class="nav-link" href="index.php">Home </a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Events </a>
+                        <div>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="alumni_talks.php"> Alumni Talks </a></li>
+                                <li><a class="dropdown-item" href="alvida.php"> Alvida </a></li>
+                                <li><a class="dropdown-item" href="AAM.php">Annual Alumni Meet </a></li>
+                                <li><a class="dropdown-item" href="homecoming.php"> Homecoming </a></li>
+                                <li><a class="dropdown-item" href="leadershipsummit.php"> Leadership Summit </a></li>
+                                <li><a class="dropdown-item" href="phonathon.php"> Phonathon </a></li>
+                                <li><a class="dropdown-item" href="SAM.php"> Students Alumni Meet </a></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Initiatives </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ACAP.php"> ACAP</a></li>
+                            <li><a class="dropdown-item" href="affinity.php"> Affinity Programme </a></li>
+                            <li><a class="dropdown-item" href="https://studentsalumnicell-iitkgp.medium.com/"> Alumni
+                                    Blog </a></li>
+                            <li><a class="dropdown-item" href="myimprint.php"> My Imprint </a></li>
+                            <li><a class="dropdown-item" href="SAMP.php"> SAMP</a></li>
+                            <li><a class="dropdown-item" href="sparc.php"> SPARC </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Publications </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://sac.iitkgp.ac.in/temposhout_final_6.pdf"> Tempo
+                                    Shout </a></li>
+                            <li><a class="dropdown-item" href="yearbook.php"> Yearbook </a></li>
+                            <li><a class="dropdown-item" href="YOY.php"> YOY </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="team.php"> The Team </a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup.php"> Alumni-Reg </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Sponsors </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="sponsors2021.php"> 2021 </a></li>
+                            <li><a class="dropdown-item" href="sponsors.php"> 2020 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2019.php"> 2019 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2018.php"> 2018 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2017.php"> 2017</a></li>
+                            <li><a class="dropdown-item" href="sponsors2016.php"> 2016 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2015.php"> 2015 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2014.php"> 2014 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2013.php"> 2013 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2012.php"> 2012 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Preloader -->
+
+    <div class="wrapper">
+        <div class="content">
+            <h1 style="color:white; margin-bottom:10vh">Welcome to the 18th Alumni Meet</h1>
+
+            <div class="loadercoaster">
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader ends -->
+    <!-- page content -->
+
+
+    <div class="cover page section-3" style="padding: 0%; width: 100%; position: absolute; top: 18vh; height: 30vh;">
+        <img class="coverimg" src="img/cover.png" />
+    </div>
+
+    <div class="section1 section-3 page disable"
+        style="background-color:rgba(255,255,255,0.85);background-size: 80% 100%;background-position: center;background-blend-mode:overlay;margin-top: 5%;">
+        <!--<img src = "./img/bk.jpeg"/>-->
+        <section class="section-2 pt-0" style="padding-bottom:10rem;">
+            <div class="padding">
+                <div class="row">
+
+                    <div class="col-md-7 col-11">
+                        <h1 class="one fadeh  justify-content-left">ABOUT US</h1>
+
+                        <div class="row fadec">
+                            <div class="col-md-10 ml-4 col-12 ml-1 justify-content-left">
+                                <p class="pt-2 x" style="opacity: 1" align="justify">
+                                    We live our day to day lives oblivious to the beauty that surrounds us and by the
+                                    time we do realise what
+                                    exactly it is that we've been blessed with, it's generally too late. However when
+                                    the good ol' days call
+                                    yet again, nostalgia surrounds us as we walk the hallowed boulevards of our youth.
+                                    The Annual Alumni Meet
+                                    brings to our alumni a chance to reconnect with their Alma Mater. It lets them
+                                    relive the carefree days of
+                                    their college lives as they get a chance to visit all the locations they once
+                                    frequented.
+                                </p>
+                                <a class="btn btn-outline-primary c" align="justify" href="signup.php"
+                                    role="button">18th Annual Meet</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-5 fadev">
+                        <div class="container" style="margin-left:0.5rem;">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-10 col-12 trailer "
+                                    style="padding-right:2rem; padding-left:2em; padding-top:3.5rem; padding-bottom:15rem;">
+                                    <div class="first"></div>
+                                    <div class="second"></div>
+                                    <div class="third">
+                                        <iframe src="https://www.youtube.com/embed/BPaRgF4rTRE" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- <div class="arrow"> -->
+    <!-- <a type="button" onclick="Prev()" class="toparrow"><i class="fa fa-angle-double-up fa-3x"></i></a> -->
+    <a type="button" onclick="Next()" class="bottomarrow "><i class="fa fa-angle-double-down fa-3x"></i></a>
+    <!-- </div> -->
+
+    <section class="section-3  page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Arena</h1>
+
+        <section class="fadei">
+            <div class="row pt-3">
+
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day1c/compressed day 1/arena3.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title"></div>
+                            <p class="image__description">The Arena is a nostalgia-filled site
+                                welcoming
+                                the Alumni to share their old memories with us.</p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day2c/compressed day 2/arena.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600"
+                            style="background-image: url('img/day2c/compressed day 2/cake_cutting.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day1c/compressed day 1/alumni4.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day1c/compressed day 1/alumni2.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+
+
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center text-center">Grand Reunion</h1>
+
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day3c/compressed day 3/ceremony4.jpg" width="100%" class="imgg100" />
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Grand Reunion</div>
+                            <p class="image__description">The Annual Alumni Meet is a fascinating
+                                trip
+                                down memory lane
+                                that allows our alumni to see old friends again and remember places
+                                and
+                                stories that were
+                                almost forgotten.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/awards.jpg" width="100%" class="img100" />
+                        <div class="image__overlay image__overlay--primary text-center"
+                            style="width:100%;height: 100%;">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <img src="img/day1c/compressed day 1/alumni.jpg" width="100%" class="img100" />
+                        <div class="image__overlay image__overlay--primary text-center"
+                            style="width:100%;height: 100%;">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet  gallery-h3 pt-5 text-center">Department Visit</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/dept_visit2.jpg" width="100%" class="imgg100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Department Visit</div>
+                            <p class="image__description">Departments are our own shrine of
+                                knowledge
+                                filled with bittersweet
+                                memories, and a visit back to this shrine surely brings back
+                                memories of
+                                all the hard work,
+                                learning, and excitement.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/alumni.jpg" width="100%" class="img100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <div class="image">
+                            <img src="img/day2c/compressed day 2/nalanda2.jpg" width="100%" class="img100">
+                            <div class="image__overlay image__overlay--primary text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Musical Night</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat1.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day2c/compressed day 2/yellow-diary.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/yellow-diary.jfif" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description">
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image ">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary imght600">
+                            <div class="image__title">Musical Night</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+    <section class="section-3 z page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Hall Visit</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/hall_visit.jpg" width="100%" class="imgg100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Hall Visit</div>
+                            <p class="image__description">The place we learnt and lived for the 4
+                                most
+                                important years in our life surely has a fragment of our soul inside
+                                it and to come back to our hall of residence is nothing less than a
+                                reunion of all of our soul.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/hall_visit4.jpg" width="100%" class="img100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <div class="image">
+                            <img src="img/day1c/compressed day 1/hall_visit2.jpg" width="100%" class="img100">
+                            <div class="image__overlay image__overlay--primary text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- <div class="row pt-3">
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/flames.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/hall_visit2.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/flames2.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+		</div> -->
+        <!-- <div class="row pt-3">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="image mt-2">
+
+					<img src="img/day1c/compressed day 1/hall_visit.jpg" width="100%" class="imght350">
+					<div class="image__overlay image__overlay--primary text-center imght350">
+						<div class="image__title">Hall Visit</div>
+						<p class="image__description">The place we learnt and lived for the 4
+							most
+							important years in our life surely has a fragment of our soul inside
+							it and to come back to our hall of residence is nothing less than a
+							reunion of all of our soul.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-1">
+				<div class="image mt-2">
+					<img src="img/day1c/compressed day 1/hall_visit4.jpg" width="100%" class="imght350">
+					<div class="image__overlay image__overlay--primary imght350">
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Campus Tour</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600"
+                            style="background-image: url('img/day2c/compressed day 2/campus_tour.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght600">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description">Campus Tour is our way of showing the 2200
+                                acre campus in a nutshell
+                                and highlighting all the major developments around.
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day2c/compressed day 2/campus_tour2.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day2c/compressed day 2/nalanda.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description">
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image ">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/football.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary imght600">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description text-center">In the progressive world we
+                                live
+                                in, there are a lot of changes and yet a lot of constants
+                                and it’s a pleasure to see the newer developments in harmony with
+                                the
+                                same old roads.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+    <div class="space"></div>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
+    <script>
+        var j = 3;
+        let x = 0;
+
+
+        const pages = document.getElementsByClassName("page");
+        const MAX_DELTA = 10;
+        var current = 0, delta = 0, size = pages.length;
+        console.log(size);
+        function fadeHeading(fadeIndex) {
+            let promise = new Promise((resolve, reject) => {
+                let fadeOutt = document.getElementsByClassName("fadet");
+                gsap.to(fadeOutt[fadeIndex], {
+                    scrollTrigger: {
+                        trigger: [fadeOutt[fadeIndex]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    duration: 1,
+                    y: -50,
+                });
+                resolve();
+            });
+            return promise;
+
+
+        }
+        function fadeImage(fadeIndex) {
+            let promise = new Promise((resolve, reject) => {
+                let fadeOuti = document.getElementsByClassName("fadei");
+                gsap.to(fadeOuti[fadeIndex], {
+                    scrollTrigger: {
+                        trigger: [fadeOuti[fadeIndex]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    duration: 1,
+                    y: -50,
+                });
+                resolve();
+
+            });
+            return promise;
+        }
+        function fadeInHeading(index) {
+            if (index > 5) return;
+            console.log("inside fadein" + index);
+            let promise = new Promise((resolve, reject) => {
+                let fadeint = document.getElementsByClassName("fadet");
+                fadeint[index].style.display = "block";
+
+                gsap.from(fadeint[index], {
+                    scrollTrigger: {
+                        trigger: [fadeint[index]],
+                        start: 'top 100%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+
+                    duration: 0.5,
+                    y: 100,
+                });
+                resolve();
+            });
+            return promise;
+        }
+        function fadeInImage(index) {
+            if (index > 6) return;
+            console.log("inside fadein" + index);
+            let promise = new Promise((resolve, reject) => {
+                let fadeini = document.getElementsByClassName("fadei");
+                fadeini[index].style.display = "block";
+                gsap.from(fadeini[index], {
+                    scrollTrigger: {
+                        trigger: [fadeini[index]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+
+                    duration: 1,
+                    y: 100,
+                });
+                resolve();
+            });
+            return promise;
+        }
+
+        function Change(index) {
+
+            for (let i = 0; i < size; i++) {
+                pages[i].style.display = "none";
+            };
+
+
+            if (index == 1) {
+                pages[index].style.display = "block";
+                var fadeh = document.getElementsByClassName("fadeh")[0];
+                var fadec = document.getElementsByClassName("fadec")[0];
+                var fadev = document.getElementsByClassName("fadev")[0];
+                fadeh.style.display = "block";
+                fadec.style.display = "none";
+                fadev.style.display = "none";
+                gsap.from(fadeh, {
+                    scrollTrigger: {
+                        trigger: [fadeh],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 1,
+                    duration: 1.25,
+                    x: 100
+                }
+                );
+                setTimeout(() => {
+                    fadec.style.display = "block";
+                    gsap.from(fadec, {
+                        scrollTrigger: {
+                            trigger: [fadec],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1.25,
+                        x: 100
+                    }
+                    );
+                }, 900)
+                setTimeout(() => {
+                    fadev.style.display = "block";
+                    gsap.from(fadev, {
+                        scrollTrigger: {
+                            trigger: [fadev],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1.25,
+                        x: 100
+                    }
+                    );
+                }, 1500)
+
+            }
+            else {
+                let fadeint = document.getElementsByClassName("fadet");
+                let fadeini = document.getElementsByClassName("fadei");
+
+                if (index == 2) {
+                    pages[current].style.display = "block";
+                    pages[current + 1].style.display = "block";
+                    fadeint[current - 1].style.display = "none";
+                    fadeini[current - 1].style.display = "none";
+                    console.log(fadeint[index - 2]);
+                    var fadeh = document.getElementsByClassName("fadeh")[0];
+                    var fadec = document.getElementsByClassName("fadec")[0];
+                    var fadev = document.getElementsByClassName("fadev")[0];
+                    gsap.to(fadeh, {
+                        scrollTrigger: {
+                            trigger: [fadeh],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1,
+                        x: -100
+                    }
+                    );
+                    setTimeout(() => {
+
+                        gsap.to(fadec, {
+                            scrollTrigger: {
+                                trigger: [fadec],
+                                start: 'top 80%',
+                                toggleActions: "play none none none"
+                            },
+                            opacity: 0,
+                            duration: 1,
+                            x: -100
+                        }
+                        );
+                    }, 900)
+                    setTimeout(() => {
+
+                        gsap.to(fadev, {
+                            scrollTrigger: {
+                                trigger: [fadev],
+                                start: 'top 80%',
+                                toggleActions: "play none none none"
+                            },
+                            opacity: 0,
+                            duration: 1,
+                            x: -100
+                        }
+                        );
+                    }, 1500);
+                    setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+
+                    setTimeout(() => { fadeInHeading(current - 1).then(() => { console.log("success in text of in" + (current - 1)) }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(current - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                    console.log(fadeint[index - 1]);
+                }
+                else {
+                    pages[index].style.display = "block";
+                    pages[index + 1].style.display = "block";
+                    fadeint[index - 1].style.display = "none";
+                    fadeini[index - 1].style.display = "none";
+                    console.log(fadeint[index - 1], fadeini[index - 1]);
+                    fadeHeading(index - 2).then(() => { console.log("success in text") }).catch(err => console.log(err)); setTimeout(() => {
+                        fadeImage(index - 2).then(() => { console.log("success in image"); }).catch(err => console.log(err));
+
+                    }, 1000);
+
+
+                    setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+
+                    setTimeout(() => { fadeInHeading(index - 1).then(() => { console.log("success in text of in") }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(index - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                }
+
+
+            }
+
+            current = index;
+            delta = 0;
+        }
+        function Next() {
+            if (current + 1 == size) return;
+            console.log("Next");
+            Change(current + 1);
+        };
+        function Prev() {
+            if (current - 1 < 0) return;
+            Change(current - 1);
+        };
+
+        $(".page").bind('mousewheel', function (e) {
+            if (j > 0) {
+                if (e.originalEvent.wheelDelta < 0) {
+                    //scroll down
+                    delta = Math.max(delta + 1, 1);
+                    if (delta >= MAX_DELTA) {
+                        console.log(current);
+                        Next();
+                        j = 0;
+                        setTimeout(disable, 2000);
+
+                    }
+                } else {
+                    //scroll up
+                    delta = Math.min(delta - 1, -1);
+                    if (delta <= -MAX_DELTA) {
+                        Prev();
+                        j = 0;
+                        setTimeout(disable, 2000);
+
+                    }
+                }
+            }
+            return false;
+        });
+
+
+
+        var arr2 = document.getElementsByClassName("bgimg");
+        var arr3 = document.getElementsByClassName("abtus");
+        gsap.from(arr2, {
+            scrollTrigger: {
+                trigger: [arr2],
+                start: 'top 80%',
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            duration: 1.25,
+            x: 100
+        }
+        );
+        gsap.from(arr3, {
+            scrollTrigger: {
+                trigger: [arr3],
+                start: 'top 80%',
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            duration: 1.25,
+            x: 100
+        }
+        );
+        function disable() {
+            j++;
+        }
+
+
+        $(window).on('load', function () {
+            for (let i = 1; i < size; i++) {
+                pages[i].style.display = "none";
+            }
+            if ($('.wrapper').length) {
+                $('.wrapper').delay(1600).fadeOut('fast', function () {
+                    $(this).remove();
+                });
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            gsap.to(window, { duration: 1, scrollTo: { y: "#section" + (index + 1), offsetY: 70 } });
+        })
+
+
+    </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Alumni Meet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link href="index.css" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    <link href="preloader.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+
+        <div class="container-fluid">
+            <a class="navbar-brand xyz" href="#"><img src="img/latestlogo.jpeg"></a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
+				aria-expanded="false" aria-label="Toggle navigation"> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"> <a class="nav-link" href="index.php">Home </a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Events </a>
+                        <div>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="alumni_talks.php"> Alumni Talks </a></li>
+                                <li><a class="dropdown-item" href="alvida.php"> Alvida </a></li>
+                                <li><a class="dropdown-item" href="AAM.php">Annual Alumni Meet </a></li>
+                                <li><a class="dropdown-item" href="homecoming.php"> Homecoming </a></li>
+                                <li><a class="dropdown-item" href="leadershipsummit.php"> Leadership Summit </a></li>
+                                <li><a class="dropdown-item" href="phonathon.php"> Phonathon </a></li>
+                                <li><a class="dropdown-item" href="SAM.php"> Students Alumni Meet </a></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Initiatives </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ACAP.php"> ACAP</a></li>
+                            <li><a class="dropdown-item" href="affinity.php"> Affinity Programme </a></li>
+                            <li><a class="dropdown-item" href="https://studentsalumnicell-iitkgp.medium.com/"> Alumni
+                                    Blog </a></li>
+                            <li><a class="dropdown-item" href="myimprint.php"> My Imprint </a></li>
+                            <li><a class="dropdown-item" href="SAMP.php"> SAMP</a></li>
+                            <li><a class="dropdown-item" href="sparc.php"> SPARC </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Publications </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://sac.iitkgp.ac.in/temposhout_final_6.pdf"> Tempo
+                                    Shout </a></li>
+                            <li><a class="dropdown-item" href="yearbook.php"> Yearbook </a></li>
+                            <li><a class="dropdown-item" href="YOY.php"> YOY </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="team.php"> The Team </a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup.php"> Alumni-Reg </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Sponsors </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="sponsors2021.php"> 2021 </a></li>
+                            <li><a class="dropdown-item" href="sponsors.php"> 2020 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2019.php"> 2019 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2018.php"> 2018 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2017.php"> 2017</a></li>
+                            <li><a class="dropdown-item" href="sponsors2016.php"> 2016 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2015.php"> 2015 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2014.php"> 2014 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2013.php"> 2013 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2012.php"> 2012 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Preloader -->
+
+    <div class="wrapper">
+        <div class="content">
+            <h1 style="color:white; margin-bottom:10vh">Welcome to the 18th Alumni Meet</h1>
+
+            <div class="loadercoaster">
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader ends -->
+    <!-- page content -->
+
+
+    <div class="cover page section-3" style="padding: 0%; width: 100%; position: absolute; top: 18vh; height: 30vh;">
+        <img class="coverimg" src="img/cover.png" />
+    </div>
+
+    <div class="section1 section-3 page disable"
+        style="background-color:rgba(255,255,255,0.85);background-size: 80% 100%;background-position: center;background-blend-mode:overlay;margin-top: 5%;">
+        <!--<img src = "./img/bk.jpeg"/>-->
+        <section class="section-2 pt-0" style="padding-bottom:10rem;">
+            <div class="padding">
+                <div class="row">
+
+                    <div class="col-md-7 col-11">
+                        <h1 class="one fadeh  justify-content-left">ABOUT US</h1>
+
+                        <div class="row fadec">
+                            <div class="col-md-10 ml-4 col-12 ml-1 justify-content-left">
+                                <p class="pt-2 x" style="opacity: 1" align="justify">
+                                    We live our day to day lives oblivious to the beauty that surrounds us and by the
+                                    time we do realise what
+                                    exactly it is that we've been blessed with, it's generally too late. However when
+                                    the good ol' days call
+                                    yet again, nostalgia surrounds us as we walk the hallowed boulevards of our youth.
+                                    The Annual Alumni Meet
+                                    brings to our alumni a chance to reconnect with their Alma Mater. It lets them
+                                    relive the carefree days of
+                                    their college lives as they get a chance to visit all the locations they once
+                                    frequented.
+                                </p>
+                                <a class="btn btn-outline-primary c" align="justify" href="signup.php"
+                                    role="button">18th Annual Meet</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-5 fadev">
+                        <div class="container" style="margin-left:0.5rem;">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-10 col-12 trailer "
+                                    style="padding-right:2rem; padding-left:2em; padding-top:3.5rem; padding-bottom:15rem;">
+                                    <div class="first"></div>
+                                    <div class="second"></div>
+                                    <div class="third">
+                                        <iframe src="https://www.youtube.com/embed/BPaRgF4rTRE" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- <div class="arrow"> -->
+    <!-- <a type="button" onclick="Prev()" class="toparrow"><i class="fa fa-angle-double-up fa-3x"></i></a> -->
+    <a type="button" onclick="Next()" class="bottomarrow "><i class="fa fa-angle-double-down fa-3x"></i></a>
+    <!-- </div> -->
+
+    <section class="section-3  page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Arena</h1>
+
+        <section class="fadei">
+            <div class="row pt-3">
+
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day1c/compressed day 1/arena3.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title"></div>
+                            <p class="image__description">The Arena is a nostalgia-filled site
+                                welcoming
+                                the Alumni to share their old memories with us.</p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day2c/compressed day 2/arena.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600"
+                            style="background-image: url('img/day2c/compressed day 2/cake_cutting.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day1c/compressed day 1/alumni4.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day1c/compressed day 1/alumni2.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+
+
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center text-center">Grand Reunion</h1>
+
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day3c/compressed day 3/ceremony4.jpg" width="100%" class="imgg100" />
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Grand Reunion</div>
+                            <p class="image__description">The Annual Alumni Meet is a fascinating
+                                trip
+                                down memory lane
+                                that allows our alumni to see old friends again and remember places
+                                and
+                                stories that were
+                                almost forgotten.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/awards.jpg" width="100%" class="img100" />
+                        <div class="image__overlay image__overlay--primary text-center"
+                            style="width:100%;height: 100%;">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <img src="img/day1c/compressed day 1/alumni.jpg" width="100%" class="img100" />
+                        <div class="image__overlay image__overlay--primary text-center"
+                            style="width:100%;height: 100%;">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet  gallery-h3 pt-5 text-center">Department Visit</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/dept_visit2.jpg" width="100%" class="imgg100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Department Visit</div>
+                            <p class="image__description">Departments are our own shrine of
+                                knowledge
+                                filled with bittersweet
+                                memories, and a visit back to this shrine surely brings back
+                                memories of
+                                all the hard work,
+                                learning, and excitement.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/alumni.jpg" width="100%" class="img100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <div class="image">
+                            <img src="img/day2c/compressed day 2/nalanda2.jpg" width="100%" class="img100">
+                            <div class="image__overlay image__overlay--primary text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Musical Night</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat1.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day2c/compressed day 2/yellow-diary.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/yellow-diary.jfif" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description">
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image ">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary imght600">
+                            <div class="image__title">Musical Night</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+    <section class="section-3 z page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Hall Visit</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/hall_visit.jpg" width="100%" class="imgg100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Hall Visit</div>
+                            <p class="image__description">The place we learnt and lived for the 4
+                                most
+                                important years in our life surely has a fragment of our soul inside
+                                it and to come back to our hall of residence is nothing less than a
+                                reunion of all of our soul.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/hall_visit4.jpg" width="100%" class="img100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <div class="image">
+                            <img src="img/day1c/compressed day 1/hall_visit2.jpg" width="100%" class="img100">
+                            <div class="image__overlay image__overlay--primary text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- <div class="row pt-3">
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/flames.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/hall_visit2.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/flames2.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+		</div> -->
+        <!-- <div class="row pt-3">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="image mt-2">
+
+					<img src="img/day1c/compressed day 1/hall_visit.jpg" width="100%" class="imght350">
+					<div class="image__overlay image__overlay--primary text-center imght350">
+						<div class="image__title">Hall Visit</div>
+						<p class="image__description">The place we learnt and lived for the 4
+							most
+							important years in our life surely has a fragment of our soul inside
+							it and to come back to our hall of residence is nothing less than a
+							reunion of all of our soul.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-1">
+				<div class="image mt-2">
+					<img src="img/day1c/compressed day 1/hall_visit4.jpg" width="100%" class="imght350">
+					<div class="image__overlay image__overlay--primary imght350">
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Campus Tour</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600"
+                            style="background-image: url('img/day2c/compressed day 2/campus_tour.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght600">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description">Campus Tour is our way of showing the 2200
+                                acre campus in a nutshell
+                                and highlighting all the major developments around.
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day2c/compressed day 2/campus_tour2.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day2c/compressed day 2/nalanda.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description">
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image ">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/football.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary imght600">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description text-center">In the progressive world we
+                                live
+                                in, there are a lot of changes and yet a lot of constants
+                                and it’s a pleasure to see the newer developments in harmony with
+                                the
+                                same old roads.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+    <div class="space"></div>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
+    <script>
+        var j = 3;
+        let x = 0;
+
+
+        const pages = document.getElementsByClassName("page");
+        const MAX_DELTA = 10;
+        var current = 0, delta = 0, size = pages.length;
+        console.log(size);
+        function fadeHeading(fadeIndex) {
+            let promise = new Promise((resolve, reject) => {
+                let fadeOutt = document.getElementsByClassName("fadet");
+                gsap.to(fadeOutt[fadeIndex], {
+                    scrollTrigger: {
+                        trigger: [fadeOutt[fadeIndex]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    duration: 1,
+                    y: -50,
+                });
+                resolve();
+            });
+            return promise;
+
+
+        }
+        function fadeImage(fadeIndex) {
+            let promise = new Promise((resolve, reject) => {
+                let fadeOuti = document.getElementsByClassName("fadei");
+                gsap.to(fadeOuti[fadeIndex], {
+                    scrollTrigger: {
+                        trigger: [fadeOuti[fadeIndex]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    duration: 1,
+                    y: -50,
+                });
+                resolve();
+
+            });
+            return promise;
+        }
+        function fadeInHeading(index) {
+            if (index > 5) return;
+            console.log("inside fadein" + index);
+            let promise = new Promise((resolve, reject) => {
+                let fadeint = document.getElementsByClassName("fadet");
+                fadeint[index].style.display = "block";
+
+                gsap.from(fadeint[index], {
+                    scrollTrigger: {
+                        trigger: [fadeint[index]],
+                        start: 'top 100%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+
+                    duration: 0.5,
+                    y: 100,
+                });
+                resolve();
+            });
+            return promise;
+        }
+        function fadeInImage(index) {
+            if (index > 6) return;
+            console.log("inside fadein" + index);
+            let promise = new Promise((resolve, reject) => {
+                let fadeini = document.getElementsByClassName("fadei");
+                fadeini[index].style.display = "block";
+                gsap.from(fadeini[index], {
+                    scrollTrigger: {
+                        trigger: [fadeini[index]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+
+                    duration: 1,
+                    y: 100,
+                });
+                resolve();
+            });
+            return promise;
+        }
+
+        function Change(index) {
+
+            for (let i = 0; i < size; i++) {
+                pages[i].style.display = "none";
+            };
+
+
+            if (index == 1) {
+                pages[index].style.display = "block";
+                var fadeh = document.getElementsByClassName("fadeh")[0];
+                var fadec = document.getElementsByClassName("fadec")[0];
+                var fadev = document.getElementsByClassName("fadev")[0];
+                fadeh.style.display = "block";
+                fadec.style.display = "none";
+                fadev.style.display = "none";
+                gsap.from(fadeh, {
+                    scrollTrigger: {
+                        trigger: [fadeh],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 1,
+                    duration: 1.25,
+                    x: 100
+                }
+                );
+                setTimeout(() => {
+                    fadec.style.display = "block";
+                    gsap.from(fadec, {
+                        scrollTrigger: {
+                            trigger: [fadec],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1.25,
+                        x: 100
+                    }
+                    );
+                }, 900)
+                setTimeout(() => {
+                    fadev.style.display = "block";
+                    gsap.from(fadev, {
+                        scrollTrigger: {
+                            trigger: [fadev],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1.25,
+                        x: 100
+                    }
+                    );
+                }, 1500)
+
+            }
+            else {
+                let fadeint = document.getElementsByClassName("fadet");
+                let fadeini = document.getElementsByClassName("fadei");
+
+                if (index == 2) {
+                    pages[current].style.display = "block";
+                    pages[current + 1].style.display = "block";
+                    fadeint[current - 1].style.display = "none";
+                    fadeini[current - 1].style.display = "none";
+                    console.log(fadeint[index - 2]);
+                    var fadeh = document.getElementsByClassName("fadeh")[0];
+                    var fadec = document.getElementsByClassName("fadec")[0];
+                    var fadev = document.getElementsByClassName("fadev")[0];
+                    gsap.to(fadeh, {
+                        scrollTrigger: {
+                            trigger: [fadeh],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1,
+                        x: -100
+                    }
+                    );
+                    setTimeout(() => {
+
+                        gsap.to(fadec, {
+                            scrollTrigger: {
+                                trigger: [fadec],
+                                start: 'top 80%',
+                                toggleActions: "play none none none"
+                            },
+                            opacity: 0,
+                            duration: 1,
+                            x: -100
+                        }
+                        );
+                    }, 900)
+                    setTimeout(() => {
+
+                        gsap.to(fadev, {
+                            scrollTrigger: {
+                                trigger: [fadev],
+                                start: 'top 80%',
+                                toggleActions: "play none none none"
+                            },
+                            opacity: 0,
+                            duration: 1,
+                            x: -100
+                        }
+                        );
+                    }, 1500);
+                    setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+
+                    setTimeout(() => { fadeInHeading(current - 1).then(() => { console.log("success in text of in" + (current - 1)) }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(current - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                    console.log(fadeint[index - 1]);
+                }
+                else {
+                    pages[index].style.display = "block";
+                    pages[index + 1].style.display = "block";
+                    fadeint[index - 1].style.display = "none";
+                    fadeini[index - 1].style.display = "none";
+                    console.log(fadeint[index - 1], fadeini[index - 1]);
+                    fadeHeading(index - 2).then(() => { console.log("success in text") }).catch(err => console.log(err)); setTimeout(() => {
+                        fadeImage(index - 2).then(() => { console.log("success in image"); }).catch(err => console.log(err));
+
+                    }, 1000);
+
+
+                    setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+
+                    setTimeout(() => { fadeInHeading(index - 1).then(() => { console.log("success in text of in") }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(index - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                }
+
+
+            }
+
+            current = index;
+            delta = 0;
+        }
+        function Next() {
+            if (current + 1 == size) return;
+            console.log("Next");
+            Change(current + 1);
+        };
+        function Prev() {
+            if (current - 1 < 0) return;
+            Change(current - 1);
+        };
+
+        $(".page").bind('mousewheel', function (e) {
+            if (j > 0) {
+                if (e.originalEvent.wheelDelta < 0) {
+                    //scroll down
+                    delta = Math.max(delta + 1, 1);
+                    if (delta >= MAX_DELTA) {
+                        console.log(current);
+                        Next();
+                        j = 0;
+                        setTimeout(disable, 2000);
+
+                    }
+                } else {
+                    //scroll up
+                    delta = Math.min(delta - 1, -1);
+                    if (delta <= -MAX_DELTA) {
+                        Prev();
+                        j = 0;
+                        setTimeout(disable, 2000);
+
+                    }
+                }
+            }
+            return false;
+        });
+
+
+
+        var arr2 = document.getElementsByClassName("bgimg");
+        var arr3 = document.getElementsByClassName("abtus");
+        gsap.from(arr2, {
+            scrollTrigger: {
+                trigger: [arr2],
+                start: 'top 80%',
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            duration: 1.25,
+            x: 100
+        }
+        );
+        gsap.from(arr3, {
+            scrollTrigger: {
+                trigger: [arr3],
+                start: 'top 80%',
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            duration: 1.25,
+            x: 100
+        }
+        );
+        function disable() {
+            j++;
+        }
+
+
+        $(window).on('load', function () {
+            for (let i = 1; i < size; i++) {
+                pages[i].style.display = "none";
+            }
+            if ($('.wrapper').length) {
+                $('.wrapper').delay(1600).fadeOut('fast', function () {
+                    $(this).remove();
+                });
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            gsap.to(window, { duration: 1, scrollTo: { y: "#section" + (index + 1), offsetY: 70 } });
+        })
+
+
+    </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Alumni Meet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link href="index.css" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    <link href="preloader.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+
+        <div class="container-fluid">
+            <a class="navbar-brand xyz" href="#"><img src="img/latestlogo.jpeg"></a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
+				aria-expanded="false" aria-label="Toggle navigation"> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"> <a class="nav-link" href="index.php">Home </a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Events </a>
+                        <div>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="alumni_talks.php"> Alumni Talks </a></li>
+                                <li><a class="dropdown-item" href="alvida.php"> Alvida </a></li>
+                                <li><a class="dropdown-item" href="AAM.php">Annual Alumni Meet </a></li>
+                                <li><a class="dropdown-item" href="homecoming.php"> Homecoming </a></li>
+                                <li><a class="dropdown-item" href="leadershipsummit.php"> Leadership Summit </a></li>
+                                <li><a class="dropdown-item" href="phonathon.php"> Phonathon </a></li>
+                                <li><a class="dropdown-item" href="SAM.php"> Students Alumni Meet </a></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Initiatives </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ACAP.php"> ACAP</a></li>
+                            <li><a class="dropdown-item" href="affinity.php"> Affinity Programme </a></li>
+                            <li><a class="dropdown-item" href="https://studentsalumnicell-iitkgp.medium.com/"> Alumni
+                                    Blog </a></li>
+                            <li><a class="dropdown-item" href="myimprint.php"> My Imprint </a></li>
+                            <li><a class="dropdown-item" href="SAMP.php"> SAMP</a></li>
+                            <li><a class="dropdown-item" href="sparc.php"> SPARC </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Publications </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://sac.iitkgp.ac.in/temposhout_final_6.pdf"> Tempo
+                                    Shout </a></li>
+                            <li><a class="dropdown-item" href="yearbook.php"> Yearbook </a></li>
+                            <li><a class="dropdown-item" href="YOY.php"> YOY </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="team.php"> The Team </a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup.php"> Alumni-Reg </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Sponsors </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="sponsors2021.php"> 2021 </a></li>
+                            <li><a class="dropdown-item" href="sponsors.php"> 2020 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2019.php"> 2019 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2018.php"> 2018 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2017.php"> 2017</a></li>
+                            <li><a class="dropdown-item" href="sponsors2016.php"> 2016 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2015.php"> 2015 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2014.php"> 2014 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2013.php"> 2013 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2012.php"> 2012 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Preloader -->
+
+    <div class="wrapper">
+        <div class="content">
+            <h1 style="color:white; margin-bottom:10vh">Welcome to the 18th Alumni Meet</h1>
+
+            <div class="loadercoaster">
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader ends -->
+    <!-- page content -->
+
+
+    <div class="cover page section-3" style="padding: 0%; width: 100%; position: absolute; top: 18vh; height: 30vh;">
+        <img class="coverimg" src="img/cover.png" />
+    </div>
+
+    <div class="section1 section-3 page disable"
+        style="background-color:rgba(255,255,255,0.85);background-size: 80% 100%;background-position: center;background-blend-mode:overlay;margin-top: 5%;">
+        <!--<img src = "./img/bk.jpeg"/>-->
+        <section class="section-2 pt-0" style="padding-bottom:10rem;">
+            <div class="padding">
+                <div class="row">
+
+                    <div class="col-md-7 col-11">
+                        <h1 class="one fadeh  justify-content-left">ABOUT US</h1>
+
+                        <div class="row fadec">
+                            <div class="col-md-10 ml-4 col-12 ml-1 justify-content-left">
+                                <p class="pt-2 x" style="opacity: 1" align="justify">
+                                    We live our day to day lives oblivious to the beauty that surrounds us and by the
+                                    time we do realise what
+                                    exactly it is that we've been blessed with, it's generally too late. However when
+                                    the good ol' days call
+                                    yet again, nostalgia surrounds us as we walk the hallowed boulevards of our youth.
+                                    The Annual Alumni Meet
+                                    brings to our alumni a chance to reconnect with their Alma Mater. It lets them
+                                    relive the carefree days of
+                                    their college lives as they get a chance to visit all the locations they once
+                                    frequented.
+                                </p>
+                                <a class="btn btn-outline-primary c" align="justify" href="signup.php"
+                                    role="button">18th Annual Meet</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-5 fadev">
+                        <div class="container" style="margin-left:0.5rem;">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-10 col-12 trailer "
+                                    style="padding-right:2rem; padding-left:2em; padding-top:3.5rem; padding-bottom:15rem;">
+                                    <div class="first"></div>
+                                    <div class="second"></div>
+                                    <div class="third">
+                                        <iframe src="https://www.youtube.com/embed/BPaRgF4rTRE" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- <div class="arrow"> -->
+    <!-- <a type="button" onclick="Prev()" class="toparrow"><i class="fa fa-angle-double-up fa-3x"></i></a> -->
+    <a type="button" onclick="Next()" class="bottomarrow "><i class="fa fa-angle-double-down fa-3x"></i></a>
+    <!-- </div> -->
+
+    <section class="section-3  page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Arena</h1>
+
+        <section class="fadei">
+            <div class="row pt-3">
+
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day1c/compressed day 1/arena3.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title"></div>
+                            <p class="image__description">The Arena is a nostalgia-filled site
+                                welcoming
+                                the Alumni to share their old memories with us.</p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day2c/compressed day 2/arena.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600"
+                            style="background-image: url('img/day2c/compressed day 2/cake_cutting.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day1c/compressed day 1/alumni4.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day1c/compressed day 1/alumni2.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+
+
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center text-center">Grand Reunion</h1>
+
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day3c/compressed day 3/ceremony4.jpg" width="100%" class="imgg100" />
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Grand Reunion</div>
+                            <p class="image__description">The Annual Alumni Meet is a fascinating
+                                trip
+                                down memory lane
+                                that allows our alumni to see old friends again and remember places
+                                and
+                                stories that were
+                                almost forgotten.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/awards.jpg" width="100%" class="img100" />
+                        <div class="image__overlay image__overlay--primary text-center"
+                            style="width:100%;height: 100%;">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <img src="img/day1c/compressed day 1/alumni.jpg" width="100%" class="img100" />
+                        <div class="image__overlay image__overlay--primary text-center"
+                            style="width:100%;height: 100%;">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet  gallery-h3 pt-5 text-center">Department Visit</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/dept_visit2.jpg" width="100%" class="imgg100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Department Visit</div>
+                            <p class="image__description">Departments are our own shrine of
+                                knowledge
+                                filled with bittersweet
+                                memories, and a visit back to this shrine surely brings back
+                                memories of
+                                all the hard work,
+                                learning, and excitement.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/alumni.jpg" width="100%" class="img100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <div class="image">
+                            <img src="img/day2c/compressed day 2/nalanda2.jpg" width="100%" class="img100">
+                            <div class="image__overlay image__overlay--primary text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Musical Night</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat1.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day2c/compressed day 2/yellow-diary.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/yellow-diary.jfif" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description">
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image ">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary imght600">
+                            <div class="image__title">Musical Night</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+    <section class="section-3 z page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Hall Visit</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/hall_visit.jpg" width="100%" class="imgg100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Hall Visit</div>
+                            <p class="image__description">The place we learnt and lived for the 4
+                                most
+                                important years in our life surely has a fragment of our soul inside
+                                it and to come back to our hall of residence is nothing less than a
+                                reunion of all of our soul.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/hall_visit4.jpg" width="100%" class="img100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <div class="image">
+                            <img src="img/day1c/compressed day 1/hall_visit2.jpg" width="100%" class="img100">
+                            <div class="image__overlay image__overlay--primary text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- <div class="row pt-3">
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/flames.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/hall_visit2.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/flames2.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+		</div> -->
+        <!-- <div class="row pt-3">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="image mt-2">
+
+					<img src="img/day1c/compressed day 1/hall_visit.jpg" width="100%" class="imght350">
+					<div class="image__overlay image__overlay--primary text-center imght350">
+						<div class="image__title">Hall Visit</div>
+						<p class="image__description">The place we learnt and lived for the 4
+							most
+							important years in our life surely has a fragment of our soul inside
+							it and to come back to our hall of residence is nothing less than a
+							reunion of all of our soul.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-1">
+				<div class="image mt-2">
+					<img src="img/day1c/compressed day 1/hall_visit4.jpg" width="100%" class="imght350">
+					<div class="image__overlay image__overlay--primary imght350">
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Campus Tour</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600"
+                            style="background-image: url('img/day2c/compressed day 2/campus_tour.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght600">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description">Campus Tour is our way of showing the 2200
+                                acre campus in a nutshell
+                                and highlighting all the major developments around.
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day2c/compressed day 2/campus_tour2.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day2c/compressed day 2/nalanda.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description">
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image ">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/football.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary imght600">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description text-center">In the progressive world we
+                                live
+                                in, there are a lot of changes and yet a lot of constants
+                                and it’s a pleasure to see the newer developments in harmony with
+                                the
+                                same old roads.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+    <div class="space"></div>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
+    <script>
+        var j = 3;
+        let x = 0;
+
+
+        const pages = document.getElementsByClassName("page");
+        const MAX_DELTA = 10;
+        var current = 0, delta = 0, size = pages.length;
+        console.log(size);
+        function fadeHeading(fadeIndex) {
+            let promise = new Promise((resolve, reject) => {
+                let fadeOutt = document.getElementsByClassName("fadet");
+                gsap.to(fadeOutt[fadeIndex], {
+                    scrollTrigger: {
+                        trigger: [fadeOutt[fadeIndex]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    duration: 1,
+                    y: -50,
+                });
+                resolve();
+            });
+            return promise;
+
+
+        }
+        function fadeImage(fadeIndex) {
+            let promise = new Promise((resolve, reject) => {
+                let fadeOuti = document.getElementsByClassName("fadei");
+                gsap.to(fadeOuti[fadeIndex], {
+                    scrollTrigger: {
+                        trigger: [fadeOuti[fadeIndex]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    duration: 1,
+                    y: -50,
+                });
+                resolve();
+
+            });
+            return promise;
+        }
+        function fadeInHeading(index) {
+            if (index > 5) return;
+            console.log("inside fadein" + index);
+            let promise = new Promise((resolve, reject) => {
+                let fadeint = document.getElementsByClassName("fadet");
+                fadeint[index].style.display = "block";
+
+                gsap.from(fadeint[index], {
+                    scrollTrigger: {
+                        trigger: [fadeint[index]],
+                        start: 'top 100%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+
+                    duration: 0.5,
+                    y: 100,
+                });
+                resolve();
+            });
+            return promise;
+        }
+        function fadeInImage(index) {
+            if (index > 6) return;
+            console.log("inside fadein" + index);
+            let promise = new Promise((resolve, reject) => {
+                let fadeini = document.getElementsByClassName("fadei");
+                fadeini[index].style.display = "block";
+                gsap.from(fadeini[index], {
+                    scrollTrigger: {
+                        trigger: [fadeini[index]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+
+                    duration: 1,
+                    y: 100,
+                });
+                resolve();
+            });
+            return promise;
+        }
+
+        function Change(index) {
+
+            for (let i = 0; i < size; i++) {
+                pages[i].style.display = "none";
+            };
+
+
+            if (index == 1) {
+                pages[index].style.display = "block";
+                var fadeh = document.getElementsByClassName("fadeh")[0];
+                var fadec = document.getElementsByClassName("fadec")[0];
+                var fadev = document.getElementsByClassName("fadev")[0];
+                fadeh.style.display = "block";
+                fadec.style.display = "none";
+                fadev.style.display = "none";
+                gsap.from(fadeh, {
+                    scrollTrigger: {
+                        trigger: [fadeh],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 1,
+                    duration: 1.25,
+                    x: 100
+                }
+                );
+                setTimeout(() => {
+                    fadec.style.display = "block";
+                    gsap.from(fadec, {
+                        scrollTrigger: {
+                            trigger: [fadec],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1.25,
+                        x: 100
+                    }
+                    );
+                }, 900)
+                setTimeout(() => {
+                    fadev.style.display = "block";
+                    gsap.from(fadev, {
+                        scrollTrigger: {
+                            trigger: [fadev],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1.25,
+                        x: 100
+                    }
+                    );
+                }, 1500)
+
+            }
+            else {
+                let fadeint = document.getElementsByClassName("fadet");
+                let fadeini = document.getElementsByClassName("fadei");
+
+                if (index == 2) {
+                    pages[current].style.display = "block";
+                    pages[current + 1].style.display = "block";
+                    fadeint[current - 1].style.display = "none";
+                    fadeini[current - 1].style.display = "none";
+                    console.log(fadeint[index - 2]);
+                    var fadeh = document.getElementsByClassName("fadeh")[0];
+                    var fadec = document.getElementsByClassName("fadec")[0];
+                    var fadev = document.getElementsByClassName("fadev")[0];
+                    gsap.to(fadeh, {
+                        scrollTrigger: {
+                            trigger: [fadeh],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1,
+                        x: -100
+                    }
+                    );
+                    setTimeout(() => {
+
+                        gsap.to(fadec, {
+                            scrollTrigger: {
+                                trigger: [fadec],
+                                start: 'top 80%',
+                                toggleActions: "play none none none"
+                            },
+                            opacity: 0,
+                            duration: 1,
+                            x: -100
+                        }
+                        );
+                    }, 900)
+                    setTimeout(() => {
+
+                        gsap.to(fadev, {
+                            scrollTrigger: {
+                                trigger: [fadev],
+                                start: 'top 80%',
+                                toggleActions: "play none none none"
+                            },
+                            opacity: 0,
+                            duration: 1,
+                            x: -100
+                        }
+                        );
+                    }, 1500);
+                    setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+
+                    setTimeout(() => { fadeInHeading(current - 1).then(() => { console.log("success in text of in" + (current - 1)) }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(current - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                    console.log(fadeint[index - 1]);
+                }
+                else {
+                    pages[index].style.display = "block";
+                    pages[index + 1].style.display = "block";
+                    fadeint[index - 1].style.display = "none";
+                    fadeini[index - 1].style.display = "none";
+                    console.log(fadeint[index - 1], fadeini[index - 1]);
+                    fadeHeading(index - 2).then(() => { console.log("success in text") }).catch(err => console.log(err)); setTimeout(() => {
+                        fadeImage(index - 2).then(() => { console.log("success in image"); }).catch(err => console.log(err));
+
+                    }, 1000);
+
+
+                    setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+
+                    setTimeout(() => { fadeInHeading(index - 1).then(() => { console.log("success in text of in") }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(index - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                }
+
+
+            }
+
+            current = index;
+            delta = 0;
+        }
+        function Next() {
+            if (current + 1 == size) return;
+            console.log("Next");
+            Change(current + 1);
+        };
+        function Prev() {
+            if (current - 1 < 0) return;
+            Change(current - 1);
+        };
+
+        $(".page").bind('mousewheel', function (e) {
+            if (j > 0) {
+                if (e.originalEvent.wheelDelta < 0) {
+                    //scroll down
+                    delta = Math.max(delta + 1, 1);
+                    if (delta >= MAX_DELTA) {
+                        console.log(current);
+                        Next();
+                        j = 0;
+                        setTimeout(disable, 2000);
+
+                    }
+                } else {
+                    //scroll up
+                    delta = Math.min(delta - 1, -1);
+                    if (delta <= -MAX_DELTA) {
+                        Prev();
+                        j = 0;
+                        setTimeout(disable, 2000);
+
+                    }
+                }
+            }
+            return false;
+        });
+
+
+
+        var arr2 = document.getElementsByClassName("bgimg");
+        var arr3 = document.getElementsByClassName("abtus");
+        gsap.from(arr2, {
+            scrollTrigger: {
+                trigger: [arr2],
+                start: 'top 80%',
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            duration: 1.25,
+            x: 100
+        }
+        );
+        gsap.from(arr3, {
+            scrollTrigger: {
+                trigger: [arr3],
+                start: 'top 80%',
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            duration: 1.25,
+            x: 100
+        }
+        );
+        function disable() {
+            j++;
+        }
+
+
+        $(window).on('load', function () {
+            for (let i = 1; i < size; i++) {
+                pages[i].style.display = "none";
+            }
+            if ($('.wrapper').length) {
+                $('.wrapper').delay(1600).fadeOut('fast', function () {
+                    $(this).remove();
+                });
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            gsap.to(window, { duration: 1, scrollTo: { y: "#section" + (index + 1), offsetY: 70 } });
+        })
+
+
+    </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Alumni Meet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link href="index.css" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    <link href="preloader.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+
+        <div class="container-fluid">
+            <a class="navbar-brand xyz" href="#"><img src="img/latestlogo.jpeg"></a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
+				aria-expanded="false" aria-label="Toggle navigation"> -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"> <a class="nav-link" href="index.php">Home </a> </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Events </a>
+                        <div>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="alumni_talks.php"> Alumni Talks </a></li>
+                                <li><a class="dropdown-item" href="alvida.php"> Alvida </a></li>
+                                <li><a class="dropdown-item" href="AAM.php">Annual Alumni Meet </a></li>
+                                <li><a class="dropdown-item" href="homecoming.php"> Homecoming </a></li>
+                                <li><a class="dropdown-item" href="leadershipsummit.php"> Leadership Summit </a></li>
+                                <li><a class="dropdown-item" href="phonathon.php"> Phonathon </a></li>
+                                <li><a class="dropdown-item" href="SAM.php"> Students Alumni Meet </a></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Initiatives </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="ACAP.php"> ACAP</a></li>
+                            <li><a class="dropdown-item" href="affinity.php"> Affinity Programme </a></li>
+                            <li><a class="dropdown-item" href="https://studentsalumnicell-iitkgp.medium.com/"> Alumni
+                                    Blog </a></li>
+                            <li><a class="dropdown-item" href="myimprint.php"> My Imprint </a></li>
+                            <li><a class="dropdown-item" href="SAMP.php"> SAMP</a></li>
+                            <li><a class="dropdown-item" href="sparc.php"> SPARC </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Publications </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://sac.iitkgp.ac.in/temposhout_final_6.pdf"> Tempo
+                                    Shout </a></li>
+                            <li><a class="dropdown-item" href="yearbook.php"> Yearbook </a></li>
+                            <li><a class="dropdown-item" href="YOY.php"> YOY </a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="team.php"> The Team </a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup.php"> Alumni-Reg </a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown"> Sponsors </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="sponsors2021.php"> 2021 </a></li>
+                            <li><a class="dropdown-item" href="sponsors.php"> 2020 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2019.php"> 2019 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2018.php"> 2018 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2017.php"> 2017</a></li>
+                            <li><a class="dropdown-item" href="sponsors2016.php"> 2016 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2015.php"> 2015 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2014.php"> 2014 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2013.php"> 2013 </a></li>
+                            <li><a class="dropdown-item" href="sponsors2012.php"> 2012 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Preloader -->
+
+    <div class="wrapper">
+        <div class="content">
+            <h1 style="color:white; margin-bottom:10vh">Welcome to the 18th Alumni Meet</h1>
+
+            <div class="loadercoaster">
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+                <div class="loadercoaster__cart"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader ends -->
+    <!-- page content -->
+
+
+    <div class="cover page section-3" style="padding: 0%; width: 100%; position: absolute; top: 18vh; height: 30vh;">
+        <img class="coverimg" src="img/cover.png" />
+    </div>
+
+    <div class="section1 section-3 page disable"
+        style="background-color:rgba(255,255,255,0.85);background-size: 80% 100%;background-position: center;background-blend-mode:overlay;margin-top: 5%;">
+        <!--<img src = "./img/bk.jpeg"/>-->
+        <section class="section-2 pt-0" style="padding-bottom:10rem;">
+            <div class="padding">
+                <div class="row">
+
+                    <div class="col-md-7 col-11">
+                        <h1 class="one fadeh  justify-content-left">ABOUT US</h1>
+
+                        <div class="row fadec">
+                            <div class="col-md-10 ml-4 col-12 ml-1 justify-content-left">
+                                <p class="pt-2 x" style="opacity: 1" align="justify">
+                                    We live our day to day lives oblivious to the beauty that surrounds us and by the
+                                    time we do realise what
+                                    exactly it is that we've been blessed with, it's generally too late. However when
+                                    the good ol' days call
+                                    yet again, nostalgia surrounds us as we walk the hallowed boulevards of our youth.
+                                    The Annual Alumni Meet
+                                    brings to our alumni a chance to reconnect with their Alma Mater. It lets them
+                                    relive the carefree days of
+                                    their college lives as they get a chance to visit all the locations they once
+                                    frequented.
+                                </p>
+                                <a class="btn btn-outline-primary c" align="justify" href="signup.php"
+                                    role="button">18th Annual Meet</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-5 fadev">
+                        <div class="container" style="margin-left:0.5rem;">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-10 col-12 trailer "
+                                    style="padding-right:2rem; padding-left:2em; padding-top:3.5rem; padding-bottom:15rem;">
+                                    <div class="first"></div>
+                                    <div class="second"></div>
+                                    <div class="third">
+                                        <iframe src="https://www.youtube.com/embed/BPaRgF4rTRE" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- <div class="arrow"> -->
+    <!-- <a type="button" onclick="Prev()" class="toparrow"><i class="fa fa-angle-double-up fa-3x"></i></a> -->
+    <a type="button" onclick="Next()" class="bottomarrow "><i class="fa fa-angle-double-down fa-3x"></i></a>
+    <!-- </div> -->
+
+    <section class="section-3  page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Arena</h1>
+
+        <section class="fadei">
+            <div class="row pt-3">
+
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day1c/compressed day 1/arena3.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title"></div>
+                            <p class="image__description">The Arena is a nostalgia-filled site
+                                welcoming
+                                the Alumni to share their old memories with us.</p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day2c/compressed day 2/arena.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600"
+                            style="background-image: url('img/day2c/compressed day 2/cake_cutting.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day1c/compressed day 1/alumni4.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day1c/compressed day 1/alumni2.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+
+
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center text-center">Grand Reunion</h1>
+
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day3c/compressed day 3/ceremony4.jpg" width="100%" class="imgg100" />
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Grand Reunion</div>
+                            <p class="image__description">The Annual Alumni Meet is a fascinating
+                                trip
+                                down memory lane
+                                that allows our alumni to see old friends again and remember places
+                                and
+                                stories that were
+                                almost forgotten.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/awards.jpg" width="100%" class="img100" />
+                        <div class="image__overlay image__overlay--primary text-center"
+                            style="width:100%;height: 100%;">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <img src="img/day1c/compressed day 1/alumni.jpg" width="100%" class="img100" />
+                        <div class="image__overlay image__overlay--primary text-center"
+                            style="width:100%;height: 100%;">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet  gallery-h3 pt-5 text-center">Department Visit</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/dept_visit2.jpg" width="100%" class="imgg100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Department Visit</div>
+                            <p class="image__description">Departments are our own shrine of
+                                knowledge
+                                filled with bittersweet
+                                memories, and a visit back to this shrine surely brings back
+                                memories of
+                                all the hard work,
+                                learning, and excitement.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/alumni.jpg" width="100%" class="img100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <div class="image">
+                            <img src="img/day2c/compressed day 2/nalanda2.jpg" width="100%" class="img100">
+                            <div class="image__overlay image__overlay--primary text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Musical Night</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat1.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day2c/compressed day 2/yellow-diary.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/yellow-diary.jfif" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+                            <div class="image__title">Musical Night</div>
+                            <p class="image__description">
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image ">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/toat.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary imght600">
+                            <div class="image__title">Musical Night</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+    <section class="section-3 z page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Hall Visit</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/hall_visit.jpg" width="100%" class="imgg100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                            <div class="image__title">Hall Visit</div>
+                            <p class="image__description">The place we learnt and lived for the 4
+                                most
+                                important years in our life surely has a fragment of our soul inside
+                                it and to come back to our hall of residence is nothing less than a
+                                reunion of all of our soul.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 d-flex flexd">
+                    <div class="image">
+                        <img src="img/day1c/compressed day 1/hall_visit4.jpg" width="100%" class="img100">
+                        <div class="image__overlay image__overlay--primary text-center">
+                        </div>
+                    </div>
+
+                    <div class="image mt-3 px-0 posn ">
+                        <div class="image">
+                            <img src="img/day1c/compressed day 1/hall_visit2.jpg" width="100%" class="img100">
+                            <div class="image__overlay image__overlay--primary text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- <div class="row pt-3">
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/flames.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/hall_visit2.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12">
+				<div class="image ">
+					<img src="img/day1c/compressed day 1/flames2.jpg" width="100%" class="img100">
+					<div class="image__overlay image__overlay--primary">
+					</div>
+				</div>
+			</div>
+		</div> -->
+        <!-- <div class="row pt-3">
+			<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="image mt-2">
+
+					<img src="img/day1c/compressed day 1/hall_visit.jpg" width="100%" class="imght350">
+					<div class="image__overlay image__overlay--primary text-center imght350">
+						<div class="image__title">Hall Visit</div>
+						<p class="image__description">The place we learnt and lived for the 4
+							most
+							important years in our life surely has a fragment of our soul inside
+							it and to come back to our hall of residence is nothing less than a
+							reunion of all of our soul.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-1">
+				<div class="image mt-2">
+					<img src="img/day1c/compressed day 1/hall_visit4.jpg" width="100%" class="imght350">
+					<div class="image__overlay image__overlay--primary imght350">
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+    </section>
+    <section class="section-3 page">
+
+        <h1 class="fadet gallery-h3 pt-5 text-center">Campus Tour</h1>
+        <section class="fadei">
+            <div class="row pt-3">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="image">
+                        <div class="imght600"
+                            style="background-image: url('img/day2c/compressed day 2/campus_tour.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary text-center imght600">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description">Campus Tour is our way of showing the 2200
+                                acre campus in a nutshell
+                                and highlighting all the major developments around.
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image mb-3">
+
+                        <img src="img/day2c/compressed day 2/campus_tour2.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center imght292">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description"></p>
+                        </div>
+                    </div>
+                    <div class="image mb-2">
+                        <img src="img/day2c/compressed day 2/nalanda.jpg" width="100%" class="imght292">
+                        <div class="image__overlay image__overlay--primary text-center text-center imght292">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description">
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="image ">
+                        <div class="imght600" style="background-image: url('img/day2c/compressed day 2/football.jpg');">
+                        </div>
+                        <div class="image__overlay image__overlay--primary imght600">
+                            <div class="image__title">Campus Tour</div>
+                            <p class="image__description text-center">In the progressive world we
+                                live
+                                in, there are a lot of changes and yet a lot of constants
+                                and it’s a pleasure to see the newer developments in harmony with
+                                the
+                                same old roads.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+    <div class="space"></div>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/ScrollTrigger.min.js"></script>
+    <script>
+        var j = 3;
+        let x = 0;
+
+
+        const pages = document.getElementsByClassName("page");
+        const MAX_DELTA = 10;
+        var current = 0, delta = 0, size = pages.length;
+        console.log(size);
+        function fadeHeading(fadeIndex) {
+            let promise = new Promise((resolve, reject) => {
+                let fadeOutt = document.getElementsByClassName("fadet");
+                gsap.to(fadeOutt[fadeIndex], {
+                    scrollTrigger: {
+                        trigger: [fadeOutt[fadeIndex]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    duration: 1,
+                    y: -50,
+                });
+                resolve();
+            });
+            return promise;
+
+
+        }
+        function fadeImage(fadeIndex) {
+            let promise = new Promise((resolve, reject) => {
+                let fadeOuti = document.getElementsByClassName("fadei");
+                gsap.to(fadeOuti[fadeIndex], {
+                    scrollTrigger: {
+                        trigger: [fadeOuti[fadeIndex]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+                    duration: 1,
+                    y: -50,
+                });
+                resolve();
+
+            });
+            return promise;
+        }
+        function fadeInHeading(index) {
+            if (index > 5) return;
+            console.log("inside fadein" + index);
+            let promise = new Promise((resolve, reject) => {
+                let fadeint = document.getElementsByClassName("fadet");
+                fadeint[index].style.display = "block";
+
+                gsap.from(fadeint[index], {
+                    scrollTrigger: {
+                        trigger: [fadeint[index]],
+                        start: 'top 100%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+
+                    duration: 0.5,
+                    y: 100,
+                });
+                resolve();
+            });
+            return promise;
+        }
+        function fadeInImage(index) {
+            if (index > 6) return;
+            console.log("inside fadein" + index);
+            let promise = new Promise((resolve, reject) => {
+                let fadeini = document.getElementsByClassName("fadei");
+                fadeini[index].style.display = "block";
+                gsap.from(fadeini[index], {
+                    scrollTrigger: {
+                        trigger: [fadeini[index]],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0,
+
+                    duration: 1,
+                    y: 100,
+                });
+                resolve();
+            });
+            return promise;
+        }
+
+        function Change(index) {
+
+            for (let i = 0; i < size; i++) {
+                pages[i].style.display = "none";
+            };
+
+
+            if (index == 1) {
+                pages[index].style.display = "block";
+                var fadeh = document.getElementsByClassName("fadeh")[0];
+                var fadec = document.getElementsByClassName("fadec")[0];
+                var fadev = document.getElementsByClassName("fadev")[0];
+                fadeh.style.display = "block";
+                fadec.style.display = "none";
+                fadev.style.display = "none";
+                gsap.from(fadeh, {
+                    scrollTrigger: {
+                        trigger: [fadeh],
+                        start: 'top 80%',
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 1,
+                    duration: 1.25,
+                    x: 100
+                }
+                );
+                setTimeout(() => {
+                    fadec.style.display = "block";
+                    gsap.from(fadec, {
+                        scrollTrigger: {
+                            trigger: [fadec],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1.25,
+                        x: 100
+                    }
+                    );
+                }, 900)
+                setTimeout(() => {
+                    fadev.style.display = "block";
+                    gsap.from(fadev, {
+                        scrollTrigger: {
+                            trigger: [fadev],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1.25,
+                        x: 100
+                    }
+                    );
+                }, 1500)
+
+            }
+            else {
+                let fadeint = document.getElementsByClassName("fadet");
+                let fadeini = document.getElementsByClassName("fadei");
+
+                if (index == 2) {
+                    pages[current].style.display = "block";
+                    pages[current + 1].style.display = "block";
+                    fadeint[current - 1].style.display = "none";
+                    fadeini[current - 1].style.display = "none";
+                    console.log(fadeint[index - 2]);
+                    var fadeh = document.getElementsByClassName("fadeh")[0];
+                    var fadec = document.getElementsByClassName("fadec")[0];
+                    var fadev = document.getElementsByClassName("fadev")[0];
+                    gsap.to(fadeh, {
+                        scrollTrigger: {
+                            trigger: [fadeh],
+                            start: 'top 80%',
+                            toggleActions: "play none none none"
+                        },
+                        opacity: 0,
+                        duration: 1,
+                        x: -100
+                    }
+                    );
+                    setTimeout(() => {
+
+                        gsap.to(fadec, {
+                            scrollTrigger: {
+                                trigger: [fadec],
+                                start: 'top 80%',
+                                toggleActions: "play none none none"
+                            },
+                            opacity: 0,
+                            duration: 1,
+                            x: -100
+                        }
+                        );
+                    }, 900)
+                    setTimeout(() => {
+
+                        gsap.to(fadev, {
+                            scrollTrigger: {
+                                trigger: [fadev],
+                                start: 'top 80%',
+                                toggleActions: "play none none none"
+                            },
+                            opacity: 0,
+                            duration: 1,
+                            x: -100
+                        }
+                        );
+                    }, 1500);
+                    setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+
+                    setTimeout(() => { fadeInHeading(current - 1).then(() => { console.log("success in text of in" + (current - 1)) }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(current - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
+                    console.log(fadeint[index - 1]);
+                }
+                else {
+                    pages[index].style.display = "block";
+                    pages[index + 1].style.display = "block";
+                    fadeint[index - 1].style.display = "none";
+                    fadeini[index - 1].style.display = "none";
+                    console.log(fadeint[index - 1], fadeini[index - 1]);
+                    fadeHeading(index - 2).then(() => { console.log("success in text") }).catch(err => console.log(err)); setTimeout(() => {
+                        fadeImage(index - 2).then(() => { console.log("success in image"); }).catch(err => console.log(err));
+
+                    }, 1000);
+
+
+                    setTimeout(() => { pages[current].style.display = "none"; }, 1900);
+
+                    setTimeout(() => { fadeInHeading(index - 1).then(() => { console.log("success in text of in") }).catch(err => console.log(err)); }, 2000)
+                    setTimeout(() => { fadeInImage(index - 1).then(() => { console.log("success in image of in"); }).catch(err => console.log(err)); }, 2502);
                 }
 
 
