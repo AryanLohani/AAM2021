@@ -13,7 +13,9 @@ body {
 
 .Contactus{
  width: 100vw;
- height: 100vh;
+ height: 85vh;
+margin-top: -2%;
+padding-top: 0;
  font-family: 'Raleway', sans-serif;
  background-size: cover;
  background-repeat: no-repeat;
@@ -23,7 +25,7 @@ body {
  display: flex;
  justify-content: center;
  align-items: center;
- padding-top:10px;
+ /* padding-top:10px; */
 }
 
 .Coninfo {
@@ -131,6 +133,10 @@ height:0.8em;
 @media (max-width:800px) {
 .card-title {
  font-size: small;
+}
+.Contactus{
+  margin-top: -5%;
+  padding-top: 0;
 }
 .card a{
  font-size: small;

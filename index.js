@@ -158,7 +158,7 @@ function Change(index) {
         }, 1500)
 
     }
-    if (index == 8) {
+    else if (index == 8) {
         pages[index].style.display = "block";
         // cards = document.getElementsByClassName("card");
         // for (i = 0; i < 4; i++) cards[i].style.opacity = "1";
@@ -286,7 +286,7 @@ function Changeprev(index) {
         pages[i].style.display = "none";
         pages[i].style.opacity = "1";
         pages[i].style.position = "absolute";
-        pages[i].style.top = "18%";
+        pages[i].style.top = "15%";
         // pages[i].style.paddingTop = "3%";
         // if (i == 0) { pages[i].style.paddingTop = "-2%"; }
 
