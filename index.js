@@ -287,7 +287,7 @@ function Changeprev(index) {
             fadei[i - 2].style.opacity = "1";
             fadet[i - 2].style.opacity = "1";
         }
-        if (i == 8 || i == (index + 1)) continue;
+        if (i == 8 || i == (index + 1) || i == 0) continue;
         pages[i].style.paddingTop = "1.35%";
     };
     setTimeout(() => { pages[index + 1].style.paddingTop = "1.4%"; }, 1000);
@@ -304,7 +304,7 @@ function Changeprev(index) {
                 toggleActions: "play none none none"
             },
             opacity: 0,
-            duration: 0.9,
+            duration: 0.5,
             x: 20
         }
         );
@@ -317,11 +317,11 @@ function Changeprev(index) {
                     toggleActions: "play none none none"
                 },
                 opacity: 0,
-                duration: 0.98,
+                duration: 0.5,
                 x: 20
             }
             );
-        }, 1000)
+        }, 500)
         setTimeout(() => {
 
             gsap.to(fadev, {
@@ -331,12 +331,12 @@ function Changeprev(index) {
                     toggleActions: "play none none none"
                 },
                 opacity: 0,
-                duration: 1,
+                duration: 0.5,
                 x: 20
             }
             );
-        }, 1500);
-        setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 2000);
+        }, 700);
+        setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1400);
     }
     if (index == 1) {
         pages[index + 1].style.display = "block";
@@ -370,7 +370,7 @@ function Changeprev(index) {
             }
             );
 
-        }, 1402);
+        }, 1002);
         setTimeout(() => {
             fadec.style.display = "block";
             fadec.style.opacity = "1";
@@ -386,7 +386,7 @@ function Changeprev(index) {
             }
             );
 
-        }, 2000);
+        }, 1400);
         setTimeout(() => {
             fadev.style.display = "block";
             fadev.style.opacity = "1";
@@ -402,7 +402,7 @@ function Changeprev(index) {
             }
             );
 
-        }, 2000);
+        }, 1500);
     }
     if (index == 7) {
         pages[index + 1].style.display = "block";

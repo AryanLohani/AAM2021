@@ -17,9 +17,13 @@ body::-webkit-scrollbar{
 .section-2{
     padding: 5vw;
 }
+.cover{
+    position: absolute;
+    top:15%
+} 
 .coverimg{
     width: 100%;
-    height: 86.3vh;
+    height: 85vh;
 }
 .bgimg2{
    display: none;
