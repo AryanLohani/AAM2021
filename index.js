@@ -54,13 +54,13 @@ function fadeInHeading(index) {
         gsap.from(fadeint[index], {
             scrollTrigger: {
                 trigger: [fadeint[index]],
-                start: 'top 80%',
+                start: 'top 100%',
                 toggleActions: "play none none none"
             },
             opacity: 0,
 
             duration: 0.5,
-            y: 100,
+            y: 30,
         });
         resolve();
     });
@@ -77,7 +77,7 @@ function fadeInImage(index) {
         gsap.from(fadeini[index], {
             scrollTrigger: {
                 trigger: [fadeini[index]],
-                start: 'top 80%',
+                start: 'top 100%',
                 toggleActions: "play none none none"
             },
             opacity: 0,
@@ -98,12 +98,10 @@ function Change(index) {
     for (let i = 0; i < size; i++) {
         pages[i].style.display = "none";
         pages[i].style.opacity = "1";
-        pages[i].style.position = "absolute";
-        pages[i].style.top = "15%";
-        // pages[i].style.marginTop = "1%";
-        // if (i == 5) { pages[i].style.top = "15%"; }
+
     };
 
+    // pages[index].style.paddingTop = "0%";
 
     if (index == 1) {
         pages[index].style.display = "block";
@@ -285,18 +283,14 @@ function Changeprev(index) {
     for (let i = 0; i < size; i++) {
         pages[i].style.display = "none";
         pages[i].style.opacity = "1";
-        pages[i].style.position = "absolute";
-        pages[i].style.top = "15%";
-        // pages[i].style.paddingTop = "3%";
-        // if (i == 0) { pages[i].style.paddingTop = "-2%"; }
-
-
-
         if (i >= 2 && i <= 7) {
             fadei[i - 2].style.opacity = "1";
             fadet[i - 2].style.opacity = "1";
         }
+        if (i == 8 || i == (index + 1)) continue;
+        pages[i].style.paddingTop = "1.35%";
     };
+    setTimeout(() => { pages[index + 1].style.paddingTop = "1.4%"; }, 1000);
     if (index == 0) {
         pages[index + 1].style.display = "block";
         var fadeh = document.getElementsByClassName("fadeh")[0];
