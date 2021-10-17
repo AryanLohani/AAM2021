@@ -290,7 +290,7 @@ function Changeprev(index) {
         if (i == 8 || i == (index + 1) || i == 0) continue;
         pages[i].style.paddingTop = "1.35%";
     };
-    setTimeout(() => { pages[index + 1].style.paddingTop = "1.4%"; }, 1000);
+    setTimeout(() => { if ((index + 1) != 8) { pages[index + 1].style.paddingTop = "1.4%"; } }, 1000);
     if (index == 0) {
         pages[index + 1].style.display = "block";
         var fadeh = document.getElementsByClassName("fadeh")[0];
