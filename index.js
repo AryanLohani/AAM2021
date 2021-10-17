@@ -54,7 +54,7 @@ function fadeInHeading(index) {
         gsap.from(fadeint[index], {
             scrollTrigger: {
                 trigger: [fadeint[index]],
-                start: 'top 100%',
+                start: 'top 80%',
                 toggleActions: "play none none none"
             },
             opacity: 0,
@@ -77,7 +77,7 @@ function fadeInImage(index) {
         gsap.from(fadeini[index], {
             scrollTrigger: {
                 trigger: [fadeini[index]],
-                start: 'top 100%',
+                start: 'top 80%',
                 toggleActions: "play none none none"
             },
             opacity: 0,

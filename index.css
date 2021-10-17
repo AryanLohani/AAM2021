@@ -11,6 +11,7 @@ body::-webkit-scrollbar{
     height: 80vh;
     padding: 0% 10%;
     position: absolute;
+    top:10%;
 }
 
 .section-2{

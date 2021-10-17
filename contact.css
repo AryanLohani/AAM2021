@@ -14,7 +14,7 @@ body {
 .Contactus{
  width: 100vw;
  height: 85vh;
-margin-top: -2%;
+margin-top: 0%;
 padding-top: 0;
  font-family: 'Raleway', sans-serif;
  background-size: cover;
@@ -135,7 +135,7 @@ height:0.8em;
  font-size: small;
 }
 .Contactus{
-  margin-top: -5%;
+  margin-top:0%;
   padding-top: 0;
 }
 .card a{
