@@ -6,7 +6,7 @@ const pages = document.getElementsByClassName("page");
 const MAX_DELTA = 10;
 var current = 0, delta = 0, size = pages.length;
 console.log(size);
-function fadeHeading(fadeIndex) {
+function fadeHeading(fadeIndex, x) {
     let promise = new Promise((resolve, reject) => {
         let fadeOutt = document.getElementsByClassName("fadet");
         console.log(fadeOutt[fadeIndex]);
@@ -18,7 +18,7 @@ function fadeHeading(fadeIndex) {
             },
             opacity: 0,
             duration: 0.5,
-            y: -20,
+            y: x,
         });
         resolve();
     });
@@ -26,7 +26,7 @@ function fadeHeading(fadeIndex) {
 
 
 }
-function fadeImage(fadeIndex) {
+function fadeImage(fadeIndex, x) {
     let promise = new Promise((resolve, reject) => {
         let fadeOuti = document.getElementsByClassName("fadei");
         gsap.to(fadeOuti[fadeIndex], {
@@ -37,14 +37,14 @@ function fadeImage(fadeIndex) {
             },
             opacity: 0,
             duration: 0.5,
-            y: -20,
+            y: x,
         });
         resolve();
 
     });
     return promise;
 }
-function fadeInHeading(index) {
+function fadeInHeading(index, x) {
     if (index > 5) return;
 
     let promise = new Promise((resolve, reject) => {
@@ -60,13 +60,13 @@ function fadeInHeading(index) {
             opacity: 0,
 
             duration: 0.5,
-            y: 30,
+            y: x,
         });
         resolve();
     });
     return promise;
 }
-function fadeInImage(index) {
+function fadeInImage(index, x) {
     if (index > 6) return;
 
     let promise = new Promise((resolve, reject) => {
@@ -83,7 +83,7 @@ function fadeInImage(index) {
             opacity: 0,
 
             duration: 0.5,
-            y: 100,
+            y: x,
         });
         resolve();
     });
@@ -98,12 +98,42 @@ function Change(index) {
     for (let i = 0; i < size; i++) {
         pages[i].style.display = "none";
         pages[i].style.opacity = "1";
+        if (i == 8 || i == (index - 1)) continue;
+        pages[i].style.paddingTop = "0%";
 
     };
-
+    let fadeint = document.getElementsByClassName("fadet");
+    let fadeini = document.getElementsByClassName("fadei");
+    setTimeout(() => { pages[index - 1].style.paddingTop = "0%"; }, 1000);
     // pages[index].style.paddingTop = "0%";
 
-    if (index == 1) {
+
+    if (index == 8) {
+        pages[index].style.display = "block";
+        // cards = document.getElementsByClassName("card");
+        // for (i = 0; i < 4; i++) cards[i].style.opacity = "1";
+        console.log(pages[index]);
+        gsap.from(".card", {
+            duration: 2,
+            scale: 0.5,
+            opacity: 0,
+            delay: 0.5,
+            stagger: 0.2,
+            ease: "elastic",
+            force3D: true
+        });
+        gsap.to(".card", {
+            duration: 2,
+            scale: 1,
+            opacity: 1,
+            delay: 0.5,
+            stagger: 0.2,
+            ease: "elastic",
+            force3D: true
+        });
+
+    }
+    else if (index == 1) {
         pages[index].style.display = "block";
         var fadeh = document.getElementsByClassName("fadeh")[0];
         var fadec = document.getElementsByClassName("fadec")[0];
@@ -138,7 +168,7 @@ function Change(index) {
                 x: 30
             }
             );
-        }, 900)
+        }, 300)
         setTimeout(() => {
             fadev.style.display = "block";
             fadev.style.opacity = "1";
@@ -153,37 +183,11 @@ function Change(index) {
                 x: 30
             }
             );
-        }, 1500)
+        }, 600)
 
     }
-    else if (index == 8) {
-        pages[index].style.display = "block";
-        // cards = document.getElementsByClassName("card");
-        // for (i = 0; i < 4; i++) cards[i].style.opacity = "1";
-        console.log(pages[index]);
-        gsap.from(".card", {
-            duration: 2,
-            scale: 0.5,
-            opacity: 0,
-            delay: 0.5,
-            stagger: 0.2,
-            ease: "elastic",
-            force3D: true
-        });
-        gsap.to(".card", {
-            duration: 2,
-            scale: 1,
-            opacity: 1,
-            delay: 0.5,
-            stagger: 0.2,
-            ease: "elastic",
-            force3D: true
-        });
-        setTimeout(() => { pages })
-    }
     else {
-        let fadeint = document.getElementsByClassName("fadet");
-        let fadeini = document.getElementsByClassName("fadei");
+
         for (i = 0; i < fadeini.length; i++) {
             fadeini[i].style.opacity = "1";
             fadeini[i].style.opacity = "1";
@@ -192,6 +196,7 @@ function Change(index) {
         if (index == 2) {
             pages[index - 1].style.display = "block";
             pages[index].style.display = "block";
+            pages[index].style.paddingTop = "1.2%";
             fadeint[index - 2].style.display = "none";
 
             fadeini[index - 2].style.display = "none";
@@ -229,7 +234,7 @@ function Change(index) {
                     x: -30
                 }
                 );
-            }, 300)
+            }, 500)
             setTimeout(() => {
 
                 gsap.to(fadev, {
@@ -243,10 +248,10 @@ function Change(index) {
                     x: -50
                 }
                 );
-            }, 600);
-            setTimeout(() => { pages[index - 1].style.display = "none"; }, 980);
-            setTimeout(() => { fadeInHeading(index - 2).then().catch(err => console.log(err)); }, 1000)
-            setTimeout(() => { fadeInImage(index - 2).then().catch(err => console.log(err)); }, 1500);
+            }, 700);
+            setTimeout(() => { pages[index - 1].style.display = "none"; }, 1002);
+            setTimeout(() => { fadeInHeading(index - 2, 30).then().catch(err => console.log(err)); }, 1002)
+            setTimeout(() => { fadeInImage(index - 2, 100).then().catch(err => console.log(err)); }, 1500);
 
         }
         else {
@@ -255,16 +260,16 @@ function Change(index) {
             fadeint[index - 2].style.display = "none";
             fadeini[index - 2].style.display = "none";
 
-            fadeHeading(index - 3).then().catch(err => console.log(err));
+            fadeHeading(index - 3, -20).then().catch(err => console.log(err));
             setTimeout(() => {
-                fadeImage(index - 3).then().catch(err => console.log(err));
+                fadeImage(index - 3, -20).then().catch(err => console.log(err));
 
             }, 400);
 
-            setTimeout(() => { pages[index - 1].style.display = "none"; }, 900);
+            setTimeout(() => { pages[index - 1].style.display = "none"; }, 1001);
 
-            setTimeout(() => { fadeInHeading(index - 2).then().catch(err => console.log(err)); }, 1000)
-            setTimeout(() => { fadeInImage(index - 2).then().catch(err => console.log(err)); }, 1500);
+            setTimeout(() => { fadeInHeading(index - 2, 30).then().catch(err => console.log(err)); }, 1002)
+            setTimeout(() => { fadeInImage(index - 2, 100).then().catch(err => console.log(err)); }, 1500);
         }
 
 
@@ -290,7 +295,7 @@ function Changeprev(index) {
         if (i == 8 || i == (index + 1) || i == 0) continue;
         pages[i].style.paddingTop = "1.35%";
     };
-    setTimeout(() => { if ((index + 1) != 8) { pages[index + 1].style.paddingTop = "1.4%"; } }, 1000);
+    setTimeout(() => { if ((index + 1) != 8) { pages[index + 1].style.paddingTop = "1.35%"; } }, 1000);
     if (index == 0) {
         pages[index + 1].style.display = "block";
         var fadeh = document.getElementsByClassName("fadeh")[0];
@@ -338,7 +343,7 @@ function Changeprev(index) {
         }, 700);
         setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1400);
     }
-    if (index == 1) {
+    else if (index == 1) {
         pages[index + 1].style.display = "block";
         let fadeh = document.getElementsByClassName("fadeh")[0];
         let fadec = document.getElementsByClassName("fadec")[0];
@@ -351,9 +356,9 @@ function Changeprev(index) {
         setTimeout(() => {
             fadeImage(index - 1).then().catch(err => console.log(err));
 
-        }, 600);
+        }, 502);
 
-        setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1400);
+        setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1001);
         setTimeout(() => {
             fadeh.style.display = "block";
             fadeh.style.opacity = "1";
@@ -404,7 +409,7 @@ function Changeprev(index) {
 
         }, 1500);
     }
-    if (index == 7) {
+    else if (index == 7) {
         pages[index + 1].style.display = "block";
         pages[index + 1].style.opacity = "1";
         fadei[index - 2].style.display = "none";
@@ -434,24 +439,24 @@ function Changeprev(index) {
 
         }, 1000);
         setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1001);
-        setTimeout(() => { fadeInHeading(index - 2).then().catch(err => console.log(err)); }, 1100);
-        setTimeout(() => { fadeInImage(index - 2).then().catch(err => console.log(err)); }, 1500);
+        setTimeout(() => { fadeInHeading(index - 2, -30).then().catch(err => console.log(err)); }, 1100);
+        setTimeout(() => { fadeInImage(index - 2, -100).then().catch(err => console.log(err)); }, 1500);
 
     }
     else {
         pages[index + 1].style.display = "block";
         fadei[index - 2].style.display = "none";
         fadet[index - 2].style.display = "none";
-        fadeHeading(index - 1).then().catch(err => console.log(err));
+        fadeHeading(index - 1, 20).then().catch(err => console.log(err));
         setTimeout(() => {
-            fadeImage(index - 1).then().catch(err => console.log(err));
+            fadeImage(index - 1, 20).then().catch(err => console.log(err));
 
-        }, 600);
+        }, 510);
 
-        setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1400);
+        setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1100);
 
-        setTimeout(() => { fadeInHeading(index - 2).then().catch(err => console.log(err)); }, 1400)
-        setTimeout(() => { fadeInImage(index - 2).then().catch(err => console.log(err)); }, 2002);
+        setTimeout(() => { fadeInHeading(index - 2, -30).then().catch(err => console.log(err)); }, 1203)
+        setTimeout(() => { fadeInImage(index - 2, -100).then().catch(err => console.log(err)); }, 1502);
 
     }
 
