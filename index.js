@@ -268,7 +268,7 @@ function Change(index) {
 
             setTimeout(() => { pages[index - 1].style.display = "none"; }, 1001);
 
-            setTimeout(() => { fadeInHeading(index - 2, 30).then().catch(err => console.log(err)); }, 1002)
+            setTimeout(() => { fadeInHeading(index - 2, 30).then().catch(err => console.log(err)); }, 1001)
             setTimeout(() => { fadeInImage(index - 2, 100).then().catch(err => console.log(err)); }, 1500);
         }
 
@@ -412,6 +412,7 @@ function Changeprev(index) {
     else if (index == 7) {
         pages[index + 1].style.display = "block";
         pages[index + 1].style.opacity = "1";
+
         fadei[index - 2].style.display = "none";
         fadet[index - 2].style.display = "none";
         gsap.to(".card", {
@@ -438,7 +439,7 @@ function Changeprev(index) {
             );
 
         }, 1000);
-        setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.display = "block"; }, 1001);
+        setTimeout(() => { pages[index + 1].style.display = "none"; pages[index].style.paddingTop = "0%"; pages[index].style.display = "block"; }, 1001);
         setTimeout(() => { fadeInHeading(index - 2, -30).then().catch(err => console.log(err)); }, 1100);
         setTimeout(() => { fadeInImage(index - 2, -100).then().catch(err => console.log(err)); }, 1500);
 
